@@ -1,69 +1,261 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Debug Integração MP</title>
+    <title>Debug Integração Completa</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 1000px; margin: auto; }
+        .teste { margin: 20px 0; padding: 20px; border: 2px solid #ddd; border-radius: 10px; }
+        .btn { background: #4361ee; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .btn:hover { background: #3a56d4; }
+        .sucesso { color: #4CAF50; font-weight: bold; }
+        .erro { color: #f44336; font-weight: bold; }
+        .info { color: #2196F3; }
+        pre { background: #f5f5f5; padding: 15px; border-radius: 5px; overflow: auto; }
+    </style>
 </head>
 <body>
-    <h1>Debug - Renda Personalizada</h1>
+    <h1>🔧 Debug Integração - Renda Personalizada</h1>
     
-    <div>
-        <h3>1. Backend URL:</h3>
-        <input type="text" id="backendUrl" style="width: 400px;" 
-               value="https://script.google.com/macros/s/AKfycbzkAgqdJYKcdi4ACu8Q3cxPSAsjbCXiX8AuRYoWBuFNxSi79WBto-RqQwe3sgnDYKQv7w/exec">
-        <button onclick="testBackend()">Testar Backend</button>
-        <pre id="backendResult"></pre>
+    <div class="teste">
+        <h2>1. Teste do Backend</h2>
+        <button class="btn" onclick="testarBackend()">Testar Conexão Backend</button>
+        <button class="btn" onclick="testarSistemaCompleto()">Teste Completo do Sistema</button>
+        <div id="resultado-backend"></div>
     </div>
     
-    <div>
-        <h3>2. Testar Pagamento (Frontend):</h3>
-        <button onclick="simulatePayment()">Simular Pagamento</button>
-        <pre id="paymentResult"></pre>
+    <div class="teste">
+        <h2>2. Teste Google Sheets</h2>
+        <button class="btn" onclick="verificarSheets()">Verificar Planilha</button>
+        <button class="btn" onclick="verificarAbas()">Verificar Abas</button>
+        <div id="resultado-sheets"></div>
     </div>
     
+    <div class="teste">
+        <h2>3. Teste Mercado Pago</h2>
+        <button class="btn" onclick="testarMP()">Testar Conexão MP</button>
+        <button class="btn" onclick="criarPagamentoTeste()">Criar Pagamento Teste (R$ 1)</button>
+        <div id="resultado-mp"></div>
+    </div>
+    
+    <div class="teste">
+        <h2>4. Teste de Quiz</h2>
+        <button class="btn" onclick="testarQuiz()">Simular Quiz Completo</button>
+        <div id="resultado-quiz"></div>
+    </div>
+    
+    <div class="teste">
+        <h2>5. Configuração Atual</h2>
+        <pre id="config-atual">Carregando...</pre>
+    </div>
+
     <script>
-        async function testBackend() {
-            const url = document.getElementById('backendUrl').value + '?action=testar_conexao';
-            
+        const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzkAgqdJYKcdi4ACu8Q3cxPSAsjbCXiX8AuRYoWBuFNxSi79WBto-RqQwe3sgnDYKQv7w/exec';
+        
+        async function testarBackend() {
             try {
-                const response = await fetch(url);
+                const response = await fetch(`${BACKEND_URL}?action=testar_conexao`);
                 const data = await response.json();
-                document.getElementById('backendResult').innerHTML = 
-                    JSON.stringify(data, null, 2);
+                document.getElementById('resultado-backend').innerHTML = 
+                    `<div class="sucesso">✅ Backend Online!</div>
+                     <pre>${JSON.stringify(data, null, 2)}</pre>`;
             } catch (error) {
-                document.getElementById('backendResult').innerHTML = 
-                    'ERRO: ' + error.message;
+                document.getElementById('resultado-backend').innerHTML = 
+                    `<div class="erro">❌ Erro: ${error.message}</div>`;
             }
         }
         
-        async function simulatePayment() {
-            const backendUrl = document.getElementById('backendUrl').value;
-            const paymentData = {
-                action: 'criar_pagamento',
-                produto: 'Renda Personalizada - Plano Básico',
-                valor: 14.90,
-                email: 'cliente@teste.com',
-                referencia: 'IR_' + Date.now()
-            };
-            
+        async function testarSistemaCompleto() {
             try {
-                const response = await fetch(backendUrl, {
+                const response = await fetch(`${BACKEND_URL}?action=testar_sistema`);
+                const data = await response.json();
+                let html = `<h3>📊 Resultado do Teste:</h3>`;
+                
+                // Configuração
+                html += `<h4>Configuração:</h4>`;
+                Object.entries(data.config).forEach(([key, value]) => {
+                    html += `<div>${key}: ${value}</div>`;
+                });
+                
+                // Sheets
+                html += `<h4>Google Sheets:</h4>`;
+                if (data.sheets.sucesso) {
+                    html += `<div class="sucesso">✅ Conectado: ${data.sheets.nome}</div>`;
+                } else {
+                    html += `<div class="erro">❌ Erro: ${data.sheets.erro}</div>`;
+                }
+                
+                // Mercado Pago
+                html += `<h4>Mercado Pago:</h4>`;
+                if (data.mp_conexao.sucesso) {
+                    html += `<div class="sucesso">✅ ${data.mp_conexao.mensagem}</div>`;
+                } else {
+                    html += `<div class="erro">❌ ${data.mp_conexao.mensagem || data.mp_conexao.erro}</div>`;
+                }
+                
+                // Abas
+                html += `<h4>Abas da Planilha:</h4>`;
+                if (data.abas.todas_existem) {
+                    html += `<div class="sucesso">✅ Todas as abas necessárias existem</div>`;
+                } else {
+                    html += `<div class="erro">❌ Faltando: ${data.abas.abas_faltando.join(', ')}</div>`;
+                }
+                
+                document.getElementById('resultado-backend').innerHTML = html;
+                
+            } catch (error) {
+                document.getElementById('resultado-backend').innerHTML = 
+                    `<div class="erro">❌ Erro: ${error.message}</div>`;
+            }
+        }
+        
+        async function verificarSheets() {
+            try {
+                const dados = {
+                    action: 'testar_sheets'
+                };
+                
+                const response = await fetch(BACKEND_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(paymentData)
+                    body: JSON.stringify(dados)
                 });
                 
                 const data = await response.json();
-                document.getElementById('paymentResult').innerHTML = 
-                    JSON.stringify(data, null, 2);
-                    
-                if (data.init_point) {
-                    window.open(data.init_point, '_blank');
+                if (data.sucesso) {
+                    document.getElementById('resultado-sheets').innerHTML = 
+                        `<div class="sucesso">✅ Google Sheets funcionando!</div>
+                         <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    document.getElementById('resultado-sheets').innerHTML = 
+                        `<div class="erro">❌ Erro: ${data.erro || data.details}</div>`;
                 }
             } catch (error) {
-                document.getElementById('paymentResult').innerHTML = 
-                    'ERRO: ' + error.message;
+                document.getElementById('resultado-sheets').innerHTML = 
+                    `<div class="erro">❌ Erro: ${error.message}</div>`;
             }
         }
+        
+        async function testarMP() {
+            try {
+                const dados = {
+                    action: 'testar_mp'
+                };
+                
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+                
+                const data = await response.json();
+                if (data.sucesso) {
+                    document.getElementById('resultado-mp').innerHTML = 
+                        `<div class="sucesso">✅ Mercado Pago conectado!</div>
+                         <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    document.getElementById('resultado-mp').innerHTML = 
+                        `<div class="erro">❌ Erro MP: ${data.erro || data.details}</div>`;
+                }
+            } catch (error) {
+                document.getElementById('resultado-mp').innerHTML = 
+                    `<div class="erro">❌ Erro: ${error.message}</div>`;
+            }
+        }
+        
+        async function criarPagamentoTeste() {
+            const dados = {
+                action: 'registrar_pagamento',
+                email: 'teste@exemplo.com',
+                respostas: {
+                    tempo: 4,
+                    recursos: ['computador', 'celular'],
+                    habilidade: 'organizado',
+                    local: 'capital',
+                    urgencia: 'semana',
+                    investimento: 200
+                },
+                produto: 'TESTE R$ 1,00',
+                valor: 1.00
+            };
+            
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+                
+                const data = await response.json();
+                if (data.sucesso && data.payment_url) {
+                    document.getElementById('resultado-mp').innerHTML = 
+                        `<div class="sucesso">✅ Pagamento criado!</div>
+                         <pre>ID: ${data.preference_id}</pre>
+                         <pre>URL: ${data.payment_url}</pre>
+                         <a href="${data.payment_url}" target="_blank" style="color: blue; text-decoration: underline;">
+                            👉 Clique para testar pagamento R$ 1,00
+                         </a>`;
+                } else {
+                    document.getElementById('resultado-mp').innerHTML = 
+                        `<div class="erro">❌ Erro ao criar pagamento:</div>
+                         <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                }
+            } catch (error) {
+                document.getElementById('resultado-mp').innerHTML = 
+                    `<div class="erro">❌ Erro: ${error.message}</div>`;
+            }
+        }
+        
+        async function testarQuiz() {
+            const dados = {
+                action: 'processar_quiz',
+                email: 'teste@exemplo.com',
+                respostas: {
+                    tempo: 4,
+                    recursos: ['computador', 'celular'],
+                    habilidade: 'organizado',
+                    local: 'capital',
+                    urgencia: 'semana',
+                    investimento: 200
+                }
+            };
+            
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+                
+                const data = await response.json();
+                if (data.sucesso) {
+                    document.getElementById('resultado-quiz').innerHTML = 
+                        `<div class="sucesso">✅ Quiz processado!</div>
+                         <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    document.getElementById('resultado-quiz').innerHTML = 
+                        `<div class="erro">❌ Erro no quiz:</div>
+                         <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                }
+            } catch (error) {
+                document.getElementById('resultado-quiz').innerHTML = 
+                    `<div class="erro">❌ Erro: ${error.message}</div>`;
+            }
+        }
+        
+        // Carrega configuração atual
+        async function carregarConfig() {
+            try {
+                const response = await fetch(`${BACKEND_URL}?action=testar_conexao`);
+                const data = await response.json();
+                document.getElementById('config-atual').innerHTML = 
+                    JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('config-atual').innerHTML = 
+                    `Erro ao carregar: ${error.message}`;
+            }
+        }
+        
+        carregarConfig();
     </script>
 </body>
 </html>
