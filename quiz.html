@@ -463,16 +463,23 @@
                 </div>
             </div>
 
-            <!-- Resultados -->
+            <!-- Resultados - VERSÃO OTIMIZADA -->
             <div class="quiz-step" id="resultsStep">
                 <div class="results-container">
+                    <!-- Banner Promocional -->
+                    <div class="promo-banner">
+                        <div class="promo-banner-content">
+                            <span class="tag">OFERTA POR TEMPO LIMITADO</span>
+                            <span>Preço especial só para você: <span class="offer-highlight">R$ 14,90</span> (era R$ 97)</span>
+                        </div>
+                    </div>
+
                     <div class="results-header">
                         <div class="results-icon">🎉</div>
-                        <h2 class="results-title">Pronto! Analisamos seu perfil único</h2>
+                        <h2 class="results-title">Pronto! Encontramos <span class="text-highlight">6 oportunidades</span> perfeitas para você</h2>
                         <p class="results-subtitle">
-                            Com base nas suas <strong>7 respostas pessoais</strong>, nosso sistema encontrou
-                            <span class="highlight" id="totalIdeias">6</span> 
-                            oportunidades <span class="text-highlight">perfeitas para você</span>
+                            Baseado nas suas respostas, nosso sistema identificou as melhores formas 
+                            de você começar a ganhar dinheiro ainda esta semana.
                         </p>
                         
                         <div class="results-badges">
@@ -482,17 +489,20 @@
                         </div>
                     </div>
                     
-                    <!-- Seção Gratuita (Limitada) -->
+                    <!-- Seção Gratuita (Amostra) -->
                     <div class="free-results">
                         <div class="section-header">
-                            <h3><i class="fas fa-gift"></i> Suas 3 primeiras ideias (Grátis)</h3>
-                            <p class="section-subtitle">Uma amostra do que você vai receber</p>
+                            <h3><i class="fas fa-eye"></i> Veja uma amostra (3 ideias grátis)</h3>
+                            <p class="section-subtitle">Esta é apenas uma prévia do que você vai receber</p>
                         </div>
                         
                         <div class="free-limitation">
                             <div class="limitation-alert">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                <span><strong>Atenção:</strong> Estas são apenas 3 de <span id="totalIdeiasAlert">6</span> ideias. As melhores podem estar faltando!</span>
+                                <div>
+                                    <strong>ATENÇÃO: Você está vendo apenas 3 de 6 ideias</strong>
+                                    <p>As melhores oportunidades podem estar escondidas na versão completa!</p>
+                                </div>
                             </div>
                         </div>
                         
@@ -501,7 +511,7 @@
                         </div>
                         
                         <div class="free-warning">
-                            <p><i class="fas fa-info-circle"></i> <strong>Limitação:</strong> As ideias gratuitas não incluem planos de ação detalhados, templates prontos ou suporte personalizado.</p>
+                            <p><i class="fas fa-info-circle"></i> <strong>Versão limitada:</strong> Estas ideias gratuitas não incluem o plano de ação detalhado, templates prontos, lista de contatos ou suporte personalizado.</p>
                         </div>
                     </div>
                     
@@ -510,207 +520,278 @@
                         <span class="divider-text">🚀 VERSÃO COMPLETA</span>
                     </div>
                     
-                    <!-- Upsell PREMIUM -->
-                    <div class="upsell-section">
-                        <div class="upsell-header">
-                            <div class="upsell-badge">OFERTA EXCLUSIVA</div>
-                            <h2 class="upsell-title">Acesso Total ao <span class="title-gradient">Seu Relatório Personalizado</span></h2>
-                            <p class="upsell-subtitle">Tudo que você precisa para começar a ganhar dinheiro esta semana</p>
+                    <!-- Oferta Principal OTIMIZADA -->
+                    <div class="main-offer">
+                        <div class="offer-header">
+                            <div class="offer-badge">OFERTA EXCLUSIVA</div>
+                            <h2 class="offer-title">Acesso Completo ao Seu <span class="title-gradient">Relatório Personalizado</span></h2>
+                            <p class="offer-subtitle">Tudo que você precisa para começar a ganhar dinheiro ainda esta semana</p>
                         </div>
                         
-                        <div class="upsell-comparison">
-                            <div class="comparison-table">
-                                <div class="comparison-header">
-                                    <div class="comparison-col comparison-free">
-                                        <h4>Versão Gratuita</h4>
-                                        <div class="price-free">R$ 0,00</div>
-                                    </div>
-                                    <div class="comparison-col comparison-vs">
-                                        <div class="vs-circle">VS</div>
-                                    </div>
-                                    <div class="comparison-col comparison-pro">
+                        <!-- Preços -->
+                        <div class="offer-pricing">
+                            <div class="price-old">
+                                <div class="original-price">R$ 97,00</div>
+                                <div class="price-label">Preço normal</div>
+                            </div>
+                            
+                            <div class="price-now">
+                                <div class="current-price">
+                                    <span class="currency">R$</span>14<span class="currency">,</span>90
+                                </div>
+                                <div class="price-save">ECONOMIZE 85%</div>
+                                <div class="payment-method">Pagamento único • Sem assinatura</div>
+                            </div>
+                        </div>
+                        
+                        <!-- O que você recebe -->
+                        <div class="inclusions">
+                            <h3 class="inclusions-title"><i class="fas fa-check-circle"></i> Você vai receber AGORA:</h3>
+                            
+                            <div class="inclusion-grid">
+                                <div class="inclusion-item">
+                                    <div class="inclusion-icon">📋</div>
+                                    <div class="inclusion-content">
                                         <h4>Relatório Completo</h4>
-                                        <div class="price-pro">
-                                            <div class="old-price">De: R$ 97,00</div>
-                                            <div class="new-price">R$ 14,90</div>
-                                            <div class="economy">Economize 85%</div>
-                                        </div>
+                                        <p>PDF com todas as 6+ ideias compatíveis + ranking das melhores</p>
                                     </div>
                                 </div>
                                 
-                                <div class="comparison-features">
-                                    <div class="feature-row">
-                                        <div class="feature-name">Todas as <span id="totalIdeiasComp">6</span> ideias compatíveis</div>
-                                        <div class="feature-free"><i class="fas fa-times"></i></div>
-                                        <div class="feature-pro"><i class="fas fa-check"></i> <strong>Todas + Ranking</strong></div>
+                                <div class="inclusion-item">
+                                    <div class="inclusion-icon">🗺️</div>
+                                    <div class="inclusion-content">
+                                        <h4>Plano de Ação Passo a Passo</h4>
+                                        <p>Exatamente o que fazer dia por dia para começar</p>
                                     </div>
-                                    
-                                    <div class="feature-row">
-                                        <div class="feature-name">Plano de ação passo a passo</div>
-                                        <div class="feature-free">Apenas resumo</div>
-                                        <div class="feature-pro"><i class="fas fa-check"></i> <strong>Detalhado (PDF 15+ páginas)</strong></div>
+                                </div>
+                                
+                                <div class="inclusion-item">
+                                    <div class="inclusion-icon">📝</div>
+                                    <div class="inclusion-content">
+                                        <h4>10+ Templates Prontos</h4>
+                                        <p>Modelos editáveis para anúncios, propostas e scripts</p>
                                     </div>
-                                    
-                                    <div class="feature-row">
-                                        <div class="feature-name">Templates prontos para usar</div>
-                                        <div class="feature-free"><i class="fas fa-times"></i></div>
-                                        <div class="feature-pro"><i class="fas fa-check"></i> <strong>10+ templates editáveis</strong></div>
+                                </div>
+                                
+                                <div class="inclusion-item">
+                                    <div class="inclusion-icon">📞</div>
+                                    <div class="inclusion-content">
+                                        <h4>Lista de Contatos e Recursos</h4>
+                                        <p>Onde encontrar clientes, fornecedores e ferramentas</p>
                                     </div>
-                                    
-                                    <div class="feature-row">
-                                        <div class="feature-name">Lista de contatos e recursos</div>
-                                        <div class="feature-free"><i class="fas fa-times"></i></div>
-                                        <div class="feature-pro"><i class="fas fa-check"></i> <strong>Diretório completo</strong></div>
+                                </div>
+                                
+                                <div class="inclusion-item">
+                                    <div class="inclusion-icon">👥</div>
+                                    <div class="inclusion-content">
+                                        <h4>Acesso à Comunidade VIP</h4>
+                                        <p>Grupo WhatsApp exclusivo com outros alunos</p>
                                     </div>
-                                    
-                                    <div class="feature-row">
-                                        <div class="feature-name">Acesso à comunidade</div>
-                                        <div class="feature-free"><i class="fas fa-times"></i></div>
-                                        <div class="feature-pro"><i class="fas fa-check"></i> <strong>Grupo VIP WhatsApp</strong></div>
-                                    </div>
-                                    
-                                    <div class="feature-row highlight-row">
-                                        <div class="feature-name">Suporte personalizado</div>
-                                        <div class="feature-free"><i class="fas fa-times"></i></div>
-                                        <div class="feature-pro"><i class="fas fa-check"></i> <strong>30 min de consultoria</strong></div>
-                                    </div>
-                                    
-                                    <div class="feature-row highlight-row">
-                                        <div class="feature-name">Atualizações vitalícias</div>
-                                        <div class="feature-free"><i class="fas fa-times"></i></div>
-                                        <div class="feature-pro"><i class="fas fa-check"></i> <strong>Novas ideias mensais</strong></div>
+                                </div>
+                                
+                                <div class="inclusion-item">
+                                    <div class="inclusion-icon">🎓</div>
+                                    <div class="inclusion-content">
+                                        <h4>Suporte Personalizado</h4>
+                                        <p>30 minutos de consultoria para tirar suas dúvidas</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Bônus Exclusivos -->
-                        <div class="bonus-section">
+                        <div class="bonuses-section">
                             <div class="bonus-header">
-                                <h3><i class="fas fa-star"></i> BÔNUS EXCLUSIVOS (Por tempo limitado)</h3>
-                                <p class="bonus-subtitle">Adicionados gratuitamente ao seu pacote</p>
+                                <div class="bonus-tag">BÔNUS GRÁTIS (Por tempo limitado)</div>
+                                <h3>Adicionamos estes extras ao seu pacote</h3>
                             </div>
                             
                             <div class="bonus-grid">
                                 <div class="bonus-card">
-                                    <div class="bonus-icon">🎁</div>
-                                    <div class="bonus-content">
-                                        <h4>Bônus #1: Kit Emergencial</h4>
-                                        <p>5 formas de ganhar R$ 200 em 48 horas (PDF + Checklist)</p>
-                                        <div class="bonus-value">Valor: R$ 27,00</div>
-                                    </div>
+                                    <h4>Kit Emergencial: R$ 200 em 48h</h4>
+                                    <p>5 formas comprovadas de ganhar dinheiro rápido quando você mais precisa</p>
+                                    <div class="bonus-value">Valor: R$ 27,00</div>
                                 </div>
                                 
                                 <div class="bonus-card">
-                                    <div class="bonus-icon">📞</div>
-                                    <div class="bonus-content">
-                                        <h4>Bônus #2: Scripts de Venda</h4>
-                                        <p>Modelos prontos para WhatsApp, ligações e e-mails</p>
-                                        <div class="bonus-value">Valor: R$ 37,00</div>
-                                    </div>
+                                    <h4>Scripts de Venda Prontos</h4>
+                                    <p>Modelos para WhatsApp, ligações e e-mails que realmente convertem</p>
+                                    <div class="bonus-value">Valor: R$ 37,00</div>
                                 </div>
                                 
                                 <div class="bonus-card">
-                                    <div class="bonus-icon">🛡️</div>
-                                    <div class="bonus-content">
-                                        <h4>Bônus #3: Garantia Estendida</h4>
-                                        <p>30 dias para testar (4x mais que o normal)</p>
-                                        <div class="bonus-value">Valor: R$ 47,00</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="total-value">
-                                <div class="value-item">
-                                    <span>Valor total do pacote:</span>
-                                    <span class="value-number">R$ 208,00</span>
-                                </div>
-                                <div class="value-item highlight">
-                                    <span>Você paga apenas:</span>
-                                    <span class="value-number big">R$ 14,90</span>
-                                </div>
-                                <div class="value-item">
-                                    <span>Economia total:</span>
-                                    <span class="value-number saving">R$ 193,10 (93%)</span>
+                                    <h4>Garantia Estendida de 30 Dias</h4>
+                                    <p>4x mais tempo para testar. Se não gostar, devolvemos 100%</p>
+                                    <div class="bonus-value">Valor: R$ 47,00</div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- CTA Principal -->
-                        <div class="cta-main">
-                            <div class="cta-timer">
-                                <div class="timer-icon">⏰</div>
-                                <div class="timer-content">
-                                    <div class="timer-title">Oferta expira em:</div>
-                                    <div class="timer-display" id="countdown">15:00</div>
-                                    <div class="timer-note">Preço sobe para R$ 47,90 após o tempo</div>
+                        <!-- Valor Total -->
+                        <div class="total-value-section">
+                            <div class="value-row">
+                                <span>Relatório Personalizado:</span>
+                                <span class="value-amount">R$ 97,00</span>
+                            </div>
+                            <div class="value-row">
+                                <span>Kit Emergencial (bônus):</span>
+                                <span class="value-amount">R$ 27,00</span>
+                            </div>
+                            <div class="value-row">
+                                <span>Scripts de Venda (bônus):</span>
+                                <span class="value-amount">R$ 37,00</span>
+                            </div>
+                            <div class="value-row">
+                                <span>Garantia Estendida (bônus):</span>
+                                <span class="value-amount">R$ 47,00</span>
+                            </div>
+                            <div class="value-row total">
+                                <span><strong>VALOR TOTAL:</strong></span>
+                                <span class="value-amount">R$ 208,00</span>
+                            </div>
+                            <div class="value-row">
+                                <span><strong>Você paga apenas:</strong></span>
+                                <span class="value-amount" style="color: #4CAF50; font-size: 2rem;">R$ 14,90</span>
+                            </div>
+                            <div class="value-row">
+                                <span><strong>Economia total:</strong></span>
+                                <span class="value-amount" style="color: #4CAF50; font-weight: 700;">R$ 193,10 (93%)</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Timer de Urgência -->
+                        <div class="cta-timer">
+                            <div class="timer-icon">⏰</div>
+                            <div class="timer-content">
+                                <div class="timer-title">OFERTA EXPIRA EM:</div>
+                                <div class="timer-display" id="countdown">14:59</div>
+                                <div class="timer-note">Preço volta para R$ 97,00 após o tempo</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Botão de Compra Principal -->
+                        <div class="buy-button-container">
+                            <button class="buy-button" id="buyButton">
+                                <i class="fas fa-bolt"></i>
+                                <div class="button-content">
+                                    <div class="button-main">QUERO MEU RELATÓRIO COMPLETO</div>
+                                    <div class="button-sub">Pagamento único • Acesso imediato • Todos os bônus</div>
+                                </div>
+                                <div class="button-price">R$ 14,90</div>
+                            </button>
+                            
+                            <div class="payment-options">
+                                <div class="payment-icons">
+                                    <i class="fab fa-cc-visa"></i>
+                                    <i class="fab fa-cc-mastercard"></i>
+                                    <i class="fab fa-cc-amex"></i>
+                                    <i class="fab fa-pix"></i>
+                                    <i class="fab fa-barcode"></i>
+                                </div>
+                                <div class="payment-security">
+                                    <i class="fas fa-lock"></i>
+                                    <span>Pagamento 100% seguro • Dados criptografados</span>
                                 </div>
                             </div>
-                            
-                            <div class="cta-buttons">
-                                <button class="btn btn-primary btn-xxl" id="buyButton">
-                                    <i class="fas fa-bolt"></i>
-                                    <div class="btn-content">
-                                        <div class="btn-main">QUERO MEU RELATÓRIO COMPLETO</div>
-                                        <div class="btn-sub">Acesso imediato + Todos os Bônus</div>
+                        </div>
+                        
+                        <!-- Garantia -->
+                        <div class="guarantee-section">
+                            <div class="guarantee-icon">🛡️</div>
+                            <h3 class="guarantee-title">Garantia de 30 Dias</h3>
+                            <p class="guarantee-text">
+                                Compre com total segurança. Se por qualquer motivo você não estiver satisfeito, 
+                                devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia.
+                            </p>
+                            <div class="guarantee-badge">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>RISCO ZERO • SATISFAÇÃO GARANTIDA</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Depoimentos -->
+                        <div class="testimonials-offer">
+                            <h3 style="text-align: center; margin-bottom: 30px;">O que outros estão dizendo:</h3>
+                            <div class="testimonials-grid">
+                                <div class="testimonial-offer">
+                                    <div class="testimonial-text">
+                                        "Comprei ontem e já apliquei uma das ideias. Fiz R$ 150 hoje mesmo! 
+                                        O plano de ação é tão detalhado que qualquer um consegue seguir."
                                     </div>
-                                    <div class="btn-price">R$ 14,90</div>
-                                </button>
-                                
-                                <div class="payment-options">
-                                    <div class="payment-icons">
-                                        <i class="fab fa-cc-visa"></i>
-                                        <i class="fab fa-cc-mastercard"></i>
-                                        <i class="fab fa-cc-amex"></i>
-                                        <i class="fab fa-pix"></i>
-                                        <i class="fab fa-barcode"></i>
-                                    </div>
-                                    <div class="payment-security">
-                                        <i class="fas fa-lock"></i>
-                                        <span>Pagamento 100% seguro • Dados criptografados</span>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">MS</div>
+                                        <div class="author-info">
+                                            <h4>Maria Silva</h4>
+                                            <p>Recife - PE</p>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div class="guarantee-badge">
-                                    <div class="guarantee-content">
-                                        <i class="fas fa-shield-alt"></i>
-                                        <div class="guarantee-text">
-                                            <strong>Garantia Incondicional de 30 Dias</strong>
-                                            <span>Se não gostar, devolvemos cada centavo. Sem perguntas.</span>
+                                <div class="testimonial-offer">
+                                    <div class="testimonial-text">
+                                        "As ideias eram perfeitas pro meu perfil. Gostei tanto que já indiquei 
+                                        para duas amigas. Valeu cada centavo!"
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">JP</div>
+                                        <div class="author-info">
+                                            <h4>João Pereira</h4>
+                                            <p>Belo Horizonte - MG</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="testimonial-offer">
+                                    <div class="testimonial-text">
+                                        "Não sabia por onde começar. O relatório me deu direção e confiança. 
+                                        Em uma semana já tinha clientes fixos. Recomendo demais!"
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">AC</div>
+                                        <div class="author-info">
+                                            <h4>Ana Costa</h4>
+                                            <p>São Paulo - SP</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="social-proof">
-                                <div class="testimonial-mini">
-                                    <div class="testimonial-text">"Comprei ontem e já fiz R$ 150 hoje mesmo!"</div>
-                                    <div class="testimonial-author">- Maria S., São Paulo</div>
-                                </div>
-                                <div class="testimonial-mini">
-                                    <div class="testimonial-text">"As ideias eram perfeitas pro meu perfil. Valeu cada centavo!"</div>
-                                    <div class="testimonial-author">- João P., Belo Horizonte</div>
-                                </div>
-                            </div>
                         </div>
                         
-                        <!-- Opção Alternativa -->
-                        <div class="alternative-option">
-                            <div class="alternative-content">
-                                <p><i class="fas fa-info-circle"></i> <strong>Precisa pensar?</strong> As 3 ideias gratuitas serão enviadas para seu email, mas você perderá:</p>
-                                <ul class="alternative-list">
-                                    <li><i class="fas fa-times"></i> As outras 3 ideias (podem ser as melhores!)</li>
-                                    <li><i class="fas fa-times"></i> Todos os bônus exclusivos</li>
-                                    <li><i class="fas fa-times"></i> Acesso à comunidade VIP</li>
-                                    <li><i class="fas fa-times"></i> O preço promocional de R$ 14,90</li>
-                                </ul>
-                                <a href="#" class="btn btn-secondary" id="skipUpsell">
-                                    <i class="fas fa-envelope"></i> 
-                                    <span>Receber apenas as 3 ideias grátis</span>
-                                    <small>(Não recomendado)</small>
-                                </a>
+                        <!-- FAQ Rápido -->
+                        <div class="faq-quick">
+                            <h3>Perguntas Frequentes:</h3>
+                            <div class="faq-quick-item">
+                                <strong>Q:</strong> É pagamento único mesmo?<br>
+                                <strong>R:</strong> SIM! Você paga apenas R$ 14,90 uma única vez. Sem mensalidade, sem assinatura.
+                            </div>
+                            <div class="faq-quick-item">
+                                <strong>Q:</strong> Como recebo o material?<br>
+                                <strong>R:</strong> Imediatamente após o pagamento você recebe acesso por e-mail. É tudo digital.
+                            </div>
+                            <div class="faq-quick-item">
+                                <strong>Q:</strong> Posso pedir reembolso?<br>
+                                <strong>R:</strong> Sim, temos garantia de 30 dias. Se não gostar, devolvemos 100%.
                             </div>
                         </div>
+                    </div>
+                    
+                    <!-- Opção Gratuita (Alternativa) -->
+                    <div class="free-option">
+                        <p>
+                            <i class="fas fa-info-circle"></i> 
+                            <strong>Quer só as 3 ideias grátis?</strong> Você receberá por e-mail, mas perderá:
+                        </p>
+                        <ul class="alternative-list">
+                            <li><i class="fas fa-times"></i> As outras 3 ideias (podem ser as melhores!)</li>
+                            <li><i class="fas fa-times"></i> Todos os bônus exclusivos (R$ 111 de valor)</li>
+                            <li><i class="fas fa-times"></i> Acesso à comunidade VIP e suporte</li>
+                            <li><i class="fas fa-times"></i> O desconto de 85% (preço volta a R$ 97)</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary" id="skipUpsell">
+                            <i class="fas fa-envelope"></i> 
+                            <span>Quero apenas as 3 ideias grátis</span>
+                            <small>(Não recomendado - você perde muito valor)</small>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -738,148 +819,247 @@
 
     <script src="js/quiz.js"></script>
     <script>
-        // Funções adicionais para a versão premium
-        function startCountdown() {
-            let minutes = 15;
-            let seconds = 0;
-            
-            const timerElement = document.getElementById('countdown');
-            if (!timerElement) return;
-            
-            const timer = setInterval(function() {
-                if (seconds === 0) {
-                    if (minutes === 0) {
-                        clearInterval(timer);
-                        timerElement.textContent = 'EXPIRADO!';
-                        timerElement.style.color = '#f44336';
-                        return;
+        // Configuração da oferta otimizada
+        document.addEventListener('DOMContentLoaded', function() {
+            // Timer de urgência melhorado
+            function startUrgencyTimer() {
+                let minutes = 14;
+                let seconds = 59;
+                
+                const timerElement = document.getElementById('countdown');
+                if (!timerElement) return;
+                
+                const timer = setInterval(function() {
+                    if (seconds === 0) {
+                        if (minutes === 0) {
+                            clearInterval(timer);
+                            timerElement.textContent = 'OFERTA EXPIRADA!';
+                            timerElement.style.color = '#f44336';
+                            timerElement.style.fontSize = '2rem';
+                            
+                            // Atualiza preço quando o timer expira
+                            const priceElement = document.querySelector('.current-price');
+                            if (priceElement) {
+                                priceElement.innerHTML = '<span class="currency">R$</span>97<span class="currency">,</span>00';
+                            }
+                            
+                            const buttonPrice = document.querySelector('.button-price');
+                            if (buttonPrice) {
+                                buttonPrice.textContent = 'R$ 97,00';
+                            }
+                            
+                            return;
+                        }
+                        minutes--;
+                        seconds = 59;
+                    } else {
+                        seconds--;
                     }
-                    minutes--;
-                    seconds = 59;
-                } else {
-                    seconds--;
-                }
-                
-                const formattedMinutes = minutes.toString().padStart(2, '0');
-                const formattedSeconds = seconds.toString().padStart(2, '0');
-                timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
-                
-                if (minutes < 2) {
-                    timerElement.style.color = '#ff6b6b';
-                    timerElement.style.animation = 'pulse 1s infinite';
-                }
-            }, 1000);
-        }
-        
-        function generateCompatibilityScore() {
-            const score = Math.floor(Math.random() * (98 - 85 + 1)) + 85;
-            const scoreElement = document.getElementById('compatibilityScore');
-            if (scoreElement) {
-                scoreElement.textContent = score;
+                    
+                    // Formatação do timer
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
+                    
+                    // Efeitos visuais nos últimos minutos
+                    if (minutes < 5) {
+                        timerElement.style.color = '#ff6b6b';
+                        
+                        if (minutes < 2) {
+                            timerElement.style.animation = 'pulse 0.8s infinite';
+                            
+                            // Pisca o banner promocional
+                            const promoBanner = document.querySelector('.promo-banner');
+                            if (promoBanner && minutes === 1 && seconds < 30) {
+                                promoBanner.style.animation = 'pulse 0.5s infinite';
+                            }
+                        }
+                    }
+                }, 1000);
             }
-            return score;
-        }
-        
-        function updateNumbers(totalIdeas) {
-            const elements = [
-                'totalIdeias',
-                'totalIdeiasAlert', 
-                'totalIdeiasComp'
-            ];
             
-            elements.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.textContent = totalIdeas;
+            // Gera score de compatibilidade realista
+            function generateRealisticScore() {
+                // Baseado nas respostas do usuário (simulação)
+                let baseScore = 85;
+                
+                // Adiciona variação baseada em "sorte"
+                const luck = Math.random();
+                if (luck > 0.7) baseScore += 10;
+                else if (luck > 0.4) baseScore += 5;
+                
+                // Limita entre 85-98
+                const finalScore = Math.min(98, Math.max(85, baseScore));
+                
+                const scoreElement = document.getElementById('compatibilityScore');
+                if (scoreElement) {
+                    // Animação do número
+                    let current = 85;
+                    const increment = 1;
+                    const interval = setInterval(() => {
+                        current += increment;
+                        scoreElement.textContent = current;
+                        
+                        if (current >= finalScore) {
+                            clearInterval(interval);
+                            scoreElement.textContent = finalScore;
+                        }
+                    }, 30);
                 }
-            });
-        }
-        
-        function displayPremiumIdeas(ideas) {
-            const container = document.getElementById('freeIdeasContainer');
-            if (!container || !ideas || ideas.length === 0) return;
-            
-            let html = '';
-            const displayedIdeas = ideas.slice(0, 3);
-            
-            displayedIdeas.forEach((ideia, index) => {
-                const compatibility = 85 + (index * 5);
-                const urgency = ideia.urgencia === 'hoje' ? 'hoje' : 
-                               ideia.urgencia === 'semana' ? 'esta semana' : 'próximas semanas';
                 
-                html += `
-                    <div class="idea-result">
-                        <div class="idea-icon-result">${getIdeaIcon(ideia)}</div>
-                        <div class="idea-content-result">
-                            <div class="idea-header">
-                                <h4>${index + 1}. ${ideia.titulo}</h4>
-                                <span class="compatibility-badge">${compatibility}% match</span>
-                            </div>
-                            <p>${ideia.descricao}</p>
-                            <div class="idea-details">
-                                <span class="idea-detail">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    R$${ideia.renda_min}-${ideia.renda_max}/mês
-                                </span>
-                                <span class="idea-detail">
-                                    <i class="fas fa-clock"></i>
-                                    ${ideia.tempo_min}-${ideia.tempo_max}h/dia
-                                </span>
-                                <span class="idea-detail">
-                                    <i class="fas fa-bolt"></i>
-                                    Começar ${urgency}
-                                </span>
-                            </div>
-                            <div class="idea-limitation">
-                                <i class="fas fa-lock"></i>
-                                <span>Plano detalhado e templates disponíveis na versão completa</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
+                return finalScore;
+            }
             
-            container.innerHTML = html;
-            
-            // Anima a aparição
-            const ideaResults = container.querySelectorAll('.idea-result');
-            ideaResults.forEach((idea, index) => {
-                idea.style.opacity = '0';
-                idea.style.transform = 'translateY(20px)';
+            // Atualiza todos os números na página
+            function updateAllNumbers(totalIdeas = 6) {
+                const elements = [
+                    'totalIdeias',
+                    'totalIdeiasAlert', 
+                    'totalIdeiasComp'
+                ];
                 
-                setTimeout(() => {
-                    idea.style.transition = 'all 0.5s ease';
-                    idea.style.opacity = '1';
-                    idea.style.transform = 'translateY(0)';
-                }, index * 200);
-            });
-        }
-        
-        // Sobrescreve a função showResults do quiz.js
-        const originalShowResults = window.showResults;
-        window.showResults = function() {
-            originalShowResults();
-            
-            // Adiciona funcionalidades premium
-            setTimeout(() => {
-                const totalIdeas = compatibleIdeas.length;
-                updateNumbers(totalIdeas);
-                generateCompatibilityScore();
-                displayPremiumIdeas(compatibleIdeas);
-                startCountdown();
+                elements.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = totalIdeas;
+                    }
+                });
                 
-                // Configura botão de compra premium
-                const buyBtn = document.getElementById('buyButton');
-                if (buyBtn) {
-                    buyBtn.addEventListener('click', function() {
-                        document.getElementById('paymentModal').classList.add('active');
+                // Atualiza também no título se existir
+                const titleElement = document.querySelector('.results-title');
+                if (titleElement && titleElement.innerHTML.includes('6 oportunidades')) {
+                    titleElement.innerHTML = titleElement.innerHTML.replace('6 oportunidades', `${totalIdeas} oportunidades`);
+                }
+            }
+            
+            // Configura botões de compra
+            function setupPurchaseButtons() {
+                const buyButton = document.getElementById('buyButton');
+                if (buyButton) {
+                    buyButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Animação de clique
+                        this.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                        
+                        // Abre modal de pagamento
+                        openPaymentModal();
+                        
+                        // Tracking (simulado)
+                        console.log('CTA Principal clicado - Iniciando processo de compra');
                     });
                 }
-            }, 100);
-        };
-        
-        // Sobrescreve displayFreeIdeas para usar a versão premium
-        window.displayFreeIdeas = displayPremiumIdeas;
+                
+                // Botão pular oferta (versão gratuita)
+                const skipButton = document.getElementById('skipUpsell');
+                if (skipButton) {
+                    skipButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        if (confirm('Tem certeza? Você perderá:\n\n• 3 ideias adicionais\n• Todos os bônus (R$ 111 valor)\n• Acesso à comunidade\n• Desconto exclusivo\n\nRecomendamos a versão completa por apenas R$ 14,90.')) {
+                            // Envia apenas as ideias gratuitas
+                            sendFreeVersion();
+                        }
+                    });
+                }
+            }
+            
+            // Função para abrir modal de pagamento
+            function openPaymentModal() {
+                const modal = document.getElementById('paymentModal');
+                if (modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Aqui você integraria com MercadoPago
+                    // Por enquanto é um placeholder
+                    setTimeout(() => {
+                        const container = document.getElementById('paymentContainer');
+                        if (container) {
+                            container.innerHTML = `
+                                <div style="text-align: center; padding: 30px;">
+                                    <div style="font-size: 3rem; color: #4361ee; margin-bottom: 20px;">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <h3 style="margin-bottom: 15px;">Redirecionando para checkout seguro...</h3>
+                                    <p style="color: #666; margin-bottom: 30px;">
+                                        Em instantes você será direcionado para o MercadoPago para finalizar sua compra de <strong>R$ 14,90</strong>.
+                                    </p>
+                                    <div style="background: #f8f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                                        <p style="margin: 0; font-size: 0.9rem;">
+                                            <i class="fas fa-lock" style="color: #4CAF50;"></i>
+                                            Pagamento 100% seguro via MercadoPago
+                                        </p>
+                                    </div>
+                                    <button onclick="simulatePayment()" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;">
+                                        <i class="fas fa-credit-card"></i> Simular Pagamento (Teste)
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    }, 500);
+                }
+            }
+            
+            // Função para simular pagamento (apenas para testes)
+            window.simulatePayment = function() {
+                const userEmail = document.getElementById('userEmail')?.value || localStorage.getItem('userEmail') || 'cliente@exemplo.com';
+                
+                // Redireciona para sucesso.html
+                window.location.href = `sucesso.html?email=${encodeURIComponent(userEmail)}&transaction=MP${Date.now()}`;
+            }
+            
+            // Função para fechar modal
+            window.closeModal = function() {
+                const modal = document.getElementById('paymentModal');
+                if (modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            // Função para enviar versão gratuita
+            function sendFreeVersion() {
+                const userEmail = document.getElementById('userEmail')?.value;
+                if (userEmail) {
+                    alert(`As 3 ideias grátis serão enviadas para: ${userEmail}\n\nVerifique sua caixa de entrada (e spam) em alguns minutos.`);
+                    // Aqui você faria a requisição para seu backend
+                } else {
+                    alert('Por favor, forneça seu e-mail primeiro.');
+                }
+            }
+            
+            // Inicializa tudo quando os resultados são mostrados
+            const originalShowResults = window.showResults;
+            window.showResults = function() {
+                if (originalShowResults) originalShowResults();
+                
+                setTimeout(() => {
+                    // Configura números e scores
+                    const totalIdeas = compatibleIdeas?.length || 6;
+                    updateAllNumbers(totalIdeas);
+                    generateRealisticScore();
+                    
+                    // Inicia timer
+                    startUrgencyTimer();
+                    
+                    // Configura botões
+                    setupPurchaseButtons();
+                    
+                    // Exibe ideias premium
+                    if (window.displayPremiumIdeas) {
+                        window.displayPremiumIdeas(compatibleIdeas || []);
+                    }
+                    
+                    // Scroll suave para os resultados
+                    document.getElementById('resultsStep')?.scrollIntoView({ behavior: 'smooth' });
+                    
+                }, 300);
+            };
+        });
     </script>
 </body>
 </html>
