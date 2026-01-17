@@ -1,8 +1,8 @@
 // ===== CONFIGURAÇÃO =====
-const BACKEND_URL = 'https://script.google.com/macros/s/1ME4OqIWN8x53bdL1nhWk0LljZLP_A_eQOurE3LARs13kaDfR7UclsbQm/exec';
-const MERCADO_PAGO_PUBLIC_KEY = 'TEST-597f533c-659d-484f-9685-04fac2f2a939';
+// SUBSTITUA ESTA URL PELA URL DO SEU GOOGLE APPS SCRIPT PUBLICADO
+const BACKEND_URL = 'https://script.google.com/macros/s/SEU_ID_DO_SCRIPT/exec';
 
-// ===== BANCO DE IDEIAS COMPLETO (50+ IDEIAS) =====
+// ===== BANCO DE IDEIAS COMPLETO (15 IDEIAS) =====
 const IDEIAS_DATABASE = [
     {
         id: 1,
@@ -275,6 +275,7 @@ let responses = {
 };
 
 let compatibleIdeas = [];
+let totalIdeasCount = 0; // AGORA É DINÂMICO, NÃO MAIS FIXO
 
 // ===== FUNÇÕES PRINCIPAIS =====
 
@@ -442,7 +443,7 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-function showResults() {
+async function showResults() {
     // Esconde último passo
     const lastStep = document.getElementById(`step${totalSteps}`);
     if (lastStep) lastStep.classList.remove('active');
@@ -451,23 +452,102 @@ function showResults() {
     const resultsStep = document.getElementById('resultsStep');
     if (resultsStep) resultsStep.classList.add('active');
     
-    // Busca ideias compatíveis
+    // 1. BUSCA IDEIAS COMPATÍVEIS LOCALMENTE (para mostrar rápido)
     compatibleIdeas = findCompatibleIdeas();
-    const totalIdeias = compatibleIdeas.length;
+    totalIdeasCount = compatibleIdeas.length;
     
-    // Atualiza números na tela
-    document.querySelectorAll('#totalIdeias, #totalIdeiasUpsell, #totalIdeiasFeature').forEach(el => {
-        if (el) el.textContent = totalIdeias;
-    });
+    console.log(`Encontradas ${totalIdeasCount} ideias compatíveis localmente`);
     
-    // Exibe 3 ideias gratuitas
-    displayFreeIdeas(compatibleIdeas.slice(0, 3));
+    // 2. ENVIA PARA O BACKEND E OBTÉM DADOS REAIS (se conectado)
+    try {
+        const backendData = await sendQuizToBackend();
+        
+        if (backendData && backendData.sucesso) {
+            // Atualiza com dados do backend (mais preciso)
+            totalIdeasCount = backendData.total_ideias || totalIdeasCount;
+            
+            // Marca se tem upsell disponível
+            if (backendData.upsell) {
+                const upsellSection = document.querySelector('.upsell-section');
+                if (upsellSection) upsellSection.style.display = 'block';
+            }
+            
+            console.log(`Backend confirmou: ${totalIdeasCount} ideias totais`);
+        }
+    } catch (error) {
+        console.log("Usando dados locais (backend offline): ", error);
+    }
     
-    // Salva para uso posterior
+    // 3. ATUALIZA TODOS OS NÚMEROS NA PÁGINA DE FORMA DINÂMICA
+    updateAllNumbers(totalIdeasCount);
+    
+    // 4. GERA COMPATIBILIDADE REALISTA (85-98%)
+    generateRealisticCompatibility();
+    
+    // 5. EXIBE 3 IDEIAS GRATUITAS
+    const freeIdeasToShow = compatibleIdeas.slice(0, 3);
+    displayFreeIdeas(freeIdeasToShow);
+    
+    // 6. SALVA LOCALMENTE PARA RECUPERAR NO PAGAMENTO
     saveToLocalStorage();
     
-    // Envia dados para backend
-    sendQuizDataToBackend();
+    // 7. INICIA TIMER DE URGÊNCIA
+    startUrgencyTimer();
+    
+    // Scroll suave para resultados
+    setTimeout(() => {
+        resultsStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+}
+
+async function sendQuizToBackend() {
+    try {
+        const response = await fetch(BACKEND_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                action: 'processar_quiz',
+                email: responses.email,
+                respostas: responses
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
+        
+    } catch (error) {
+        console.error("Erro ao conectar com backend: ", error);
+        return null;
+    }
+}
+
+function updateAllNumbers(total) {
+    // Atualiza TODOS os lugares onde aparece o número de ideias
+    const elementsToUpdate = [
+        'totalIdeias',
+        'totalIdeiasAlert', 
+        'totalIdeiasComp'
+    ];
+    
+    elementsToUpdate.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = total;
+        }
+    });
+    
+    // Atualiza também textos dinâmicos
+    const titleElement = document.querySelector('.results-title');
+    if (titleElement) {
+        const newTitle = titleElement.innerHTML.replace(/\d+ oportunidades/, `${total} oportunidades`);
+        titleElement.innerHTML = newTitle;
+    }
 }
 
 function findCompatibleIdeas() {
@@ -519,6 +599,38 @@ function calculateIdeaScore(ideia) {
     return score;
 }
 
+function generateRealisticCompatibility() {
+    // Gera score de compatibilidade realista (85-98%)
+    let baseScore = 85;
+    
+    // Baseado no número de ideias encontradas
+    if (totalIdeasCount > 10) baseScore += 8;
+    else if (totalIdeasCount > 5) baseScore += 5;
+    else if (totalIdeasCount > 0) baseScore += 2;
+    
+    // Adiciona variação aleatória
+    const randomBonus = Math.floor(Math.random() * 5);
+    const finalScore = Math.min(98, baseScore + randomBonus);
+    
+    // Atualiza na tela com animação
+    const scoreElement = document.getElementById('compatibilityScore');
+    if (scoreElement) {
+        // Animação de contagem
+        let current = 85;
+        const interval = setInterval(() => {
+            current++;
+            scoreElement.textContent = current;
+            
+            if (current >= finalScore) {
+                clearInterval(interval);
+                scoreElement.textContent = finalScore;
+            }
+        }, 50);
+    }
+    
+    return finalScore;
+}
+
 function displayFreeIdeas(ideas) {
     const container = document.getElementById('freeIdeasContainer');
     
@@ -533,11 +645,17 @@ function displayFreeIdeas(ideas) {
     
     let html = '';
     ideas.forEach((ideia, index) => {
+        // Calcula compatibilidade individual (para visualização)
+        const compatibility = 85 + (index * 4);
+        
         html += `
-            <div class="idea-result">
+            <div class="idea-result" style="animation-delay: ${index * 0.2}s">
                 <div class="idea-icon-result">${getIdeaIcon(ideia)}</div>
                 <div class="idea-content-result">
-                    <h4>${index + 1}. ${ideia.titulo}</h4>
+                    <div class="idea-header">
+                        <h4>${index + 1}. ${ideia.titulo}</h4>
+                        <span class="compatibility-badge">${compatibility}% match</span>
+                    </div>
                     <p>${ideia.descricao}</p>
                     <div class="idea-details">
                         <span class="idea-detail">
@@ -552,6 +670,10 @@ function displayFreeIdeas(ideas) {
                             <i class="fas fa-calendar-check"></i>
                             ${getUrgencyText(ideia.urgencia)}
                         </span>
+                    </div>
+                    <div class="idea-limitation">
+                        <i class="fas fa-lock"></i>
+                        <span>Plano detalhado e templates disponíveis na versão completa</span>
                     </div>
                 </div>
             </div>
@@ -584,162 +706,138 @@ function getUrgencyText(urgency) {
 function saveToLocalStorage() {
     localStorage.setItem('quizResponses', JSON.stringify(responses));
     localStorage.setItem('compatibleIdeas', JSON.stringify(compatibleIdeas));
+    localStorage.setItem('totalIdeasCount', totalIdeasCount.toString());
 }
 
-async function sendQuizDataToBackend() {
-    try {
-        // Envia dados para o Google Apps Script
-        const response = await fetch(BACKEND_URL, {
-            method: 'POST',
-            mode: 'no-cors', // Importante para Google Apps Script
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                action: 'save_quiz',
-                email: responses.email,
-                responses: responses,
-                timestamp: new Date().toISOString()
-            })
-        });
+// ===== TIMER DE URGÊNCIA =====
+
+function startUrgencyTimer() {
+    let minutes = 14;
+    let seconds = 59;
+    
+    const timerElement = document.getElementById('countdown');
+    if (!timerElement) return;
+    
+    const timer = setInterval(function() {
+        if (seconds === 0) {
+            if (minutes === 0) {
+                clearInterval(timer);
+                timerElement.textContent = 'EXPIRADO!';
+                timerElement.style.color = '#f44336';
+                timerElement.style.animation = 'pulse 1s infinite';
+                return;
+            }
+            minutes--;
+            seconds = 59;
+        } else {
+            seconds--;
+        }
         
-        console.log('Dados enviados para backend');
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+        const formattedSeconds = seconds.toString().padStart(2, '0');
+        timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
         
-    } catch (error) {
-        console.log('Backend offline, salvando apenas localmente');
-    }
+        if (minutes < 5) {
+            timerElement.style.color = '#ff6b6b';
+            
+            if (minutes < 2) {
+                timerElement.style.animation = 'pulse 0.8s infinite';
+            }
+        }
+    }, 1000);
 }
+
+// ===== PAGAMENTO COM MERCADO PAGO (INTEGRAÇÃO REAL) =====
 
 async function processPayment() {
     try {
-        // Abre modal
+        // 1. Abre modal de carregamento
         document.getElementById('paymentModal').classList.add('active');
+        const paymentContainer = document.getElementById('paymentContainer');
         
-        // Verifica se Mercado Pago está carregado
-        if (typeof MercadoPago === 'undefined') {
-            throw new Error('Mercado Pago não carregado');
-        }
-        
-        // Inicializa Mercado Pago
-        const mp = new MercadoPago(MERCADO_PAGO_PUBLIC_KEY, {
-            locale: 'pt-BR'
-        });
-        
-        // Cria preferência de pagamento
-        const preferenceData = {
-            items: [
-                {
-                    title: "Relatório Completo de Ideias de Renda",
-                    description: `${compatibleIdeas.length} ideias personalizadas + planos de ação`,
-                    quantity: 1,
-                    currency_id: "BRL",
-                    unit_price: 14.90
-                }
-            ],
-            payer: {
-                email: responses.email
-            },
-            metadata: {
-                quiz_responses: JSON.stringify(responses),
-                compatible_ideas_count: compatibleIdeas.length
-            },
-            back_urls: {
-                success: window.location.origin + "/sucesso.html",
-                failure: window.location.origin + "/erro.html",
-                pending: window.location.origin + "/erro.html"
-            },
-            auto_return: "approved"
-        };
-        
-        // Aqui você precisaria enviar para SEU backend que criará a preferência
-        // Por enquanto, simulamos
-        simulatePaymentProcess(mp);
-        
-    } catch (error) {
-        console.error('Erro no pagamento:', error);
-        showPaymentError();
-    }
-}
-
-function simulatePaymentProcess(mp) {
-    const paymentContainer = document.getElementById('paymentContainer');
-    
-    // Simula carregamento
-    paymentContainer.innerHTML = `
-        <div class="loading-payment">
-            <div class="spinner"></div>
-            <p>Preparando checkout seguro...</p>
-            <p class="small">(Modo simulação - em produção integre com Mercado Pago)</p>
-        </div>
-    `;
-    
-    // Simula sucesso após 3 segundos
-    setTimeout(() => {
         paymentContainer.innerHTML = `
-            <div class="payment-success">
-                <div class="success-icon">✅</div>
-                <h4>Pagamento simulado com sucesso!</h4>
-                <p>Em produção, aqui apareceria o checkout do Mercado Pago.</p>
-                <p><strong>Dados da compra:</strong></p>
-                <ul>
-                    <li>Email: ${responses.email}</li>
-                    <li>Valor: R$ 14,90</li>
-                    <li>Ideias: ${compatibleIdeas.length} encontradas</li>
-                </ul>
-                <button class="btn btn-primary" onclick="window.location.href='sucesso.html'">
-                    Continuar para Relatório
-                </button>
-                <button class="btn btn-secondary" onclick="closeModal()">
-                    Fechar
-                </button>
+            <div class="loading-payment">
+                <div class="spinner"></div>
+                <p>Criando link de pagamento seguro...</p>
             </div>
         `;
         
-        // Em produção real, aqui você enviaria para seu backend
-        // para processar o pagamento e enviar o produto
-        sendPaymentToBackend();
+        // 2. Envia dados para o backend criar pagamento no Mercado Pago
+        const paymentData = {
+            action: 'registrar_pagamento',
+            email: responses.email,
+            respostas: responses,
+            produto: "Relatório Completo de Ideias de Renda",
+            valor: 14.90,
+            ideias_count: totalIdeasCount
+        };
         
-    }, 3000);
-}
-
-async function sendPaymentToBackend() {
-    try {
-        await fetch(BACKEND_URL, {
+        console.log("Enviando dados para pagamento:", paymentData);
+        
+        const response = await fetch(BACKEND_URL, {
             method: 'POST',
-            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                action: 'process_payment',
-                email: responses.email,
-                amount: 14.90,
-                ideas_count: compatibleIdeas.length,
-                payment_status: 'approved_simulation',
-                timestamp: new Date().toISOString()
-            })
+            body: JSON.stringify(paymentData)
         });
         
-        console.log('Pagamento registrado no backend');
+        const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
+        // 3. O backend deve retornar a URL do Mercado Pago
+        if (data.payment_url) {
+            // Redireciona para o checkout do Mercado Pago
+            console.log("Redirecionando para:", data.payment_url);
+            window.location.href = data.payment_url;
+        } else if (data.preference_id) {
+            // Fallback: mostra botão manual com link
+            paymentContainer.innerHTML = `
+                <div class="payment-manual">
+                    <div class="success-icon">✅</div>
+                    <h4>Pronto para pagar!</h4>
+                    <p>Clique no botão abaixo para finalizar sua compra de <strong>R$ 14,90</strong>.</p>
+                    <p><strong>Detalhes:</strong></p>
+                    <ul>
+                        <li>📧 Email: ${responses.email}</li>
+                        <li>💡 Ideias: ${totalIdeasCount} personalizadas</li>
+                        <li>🎁 Bônus: Todos incluídos</li>
+                        <li>🛡️ Garantia: 30 dias</li>
+                    </ul>
+                    <a href="https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=${data.preference_id}" 
+                       class="btn btn-primary btn-lg" style="margin: 15px 0;">
+                        <i class="fas fa-lock"></i> Pagar com Mercado Pago
+                    </a>
+                    <button class="btn btn-secondary" onclick="closeModal()">
+                        Cancelar
+                    </button>
+                </div>
+            `;
+        } else {
+            throw new Error('Nenhum link de pagamento retornado');
+        }
         
     } catch (error) {
-        console.log('Backend offline durante pagamento');
+        console.error('Erro no pagamento:', error);
+        showPaymentError(error.message || 'Não foi possível criar o pagamento.');
     }
 }
 
-function showPaymentError() {
+function showPaymentError(message) {
     const paymentContainer = document.getElementById('paymentContainer');
     paymentContainer.innerHTML = `
         <div class="payment-error">
             <div class="error-icon">❌</div>
             <h4>Erro no processamento</h4>
-            <p>Configure o Mercado Pago para testar pagamentos reais.</p>
-            <p><strong>Passos para configurar:</strong></p>
+            <p>${message || 'Não foi possível criar o pagamento.'}</p>
+            <p><strong>Solução:</strong></p>
             <ol>
-                <li>Crie conta em mercadopago.com.br</li>
-                <li>Obtenha suas chaves API</li>
-                <li>Substitua no código as variáveis BACKEND_URL e MERCADO_PAGO_PUBLIC_KEY</li>
-                <li>Configure webhooks no painel do Mercado Pago</li>
+                <li>Verifique se o Google Apps Script está publicado</li>
+                <li>Confirme as credenciais do Mercado Pago no script</li>
+                <li>Teste novamente em alguns minutos</li>
             </ol>
             <button class="btn btn-secondary" onclick="closeModal()">
                 Fechar
@@ -748,33 +846,39 @@ function showPaymentError() {
     `;
 }
 
-function sendFreeResults() {
-    alert(`✨ As 3 ideias gratuitas foram processadas!\n\nEm produção, seriam enviadas para: ${responses.email}\n\nConfigure o backend do Google Apps Script para enviar emails automáticos.`);
+async function sendFreeResults() {
+    if (!responses.email) {
+        alert('Por favor, forneça seu email primeiro.');
+        return;
+    }
     
-    // Aqui você enviaria para o backend processar e enviar email
-    sendFreeResultsToBackend();
-}
-
-async function sendFreeResultsToBackend() {
     try {
-        await fetch(BACKEND_URL, {
+        const response = await fetch(BACKEND_URL, {
             method: 'POST',
-            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                action: 'send_free_results',
+                action: 'enviar_gratuito',
                 email: responses.email,
-                free_ideas: compatibleIdeas.slice(0, 3).map(i => i.id),
-                timestamp: new Date().toISOString()
+                respostas: responses,
+                free_ideas: compatibleIdeas.slice(0, 3).map(i => i.id)
             })
         });
         
-        console.log('Resultados gratuitos enviados para backend');
+        const data = await response.json();
+        
+        if (data.sucesso) {
+            alert(`✅ As 3 ideias grátis foram processadas!\n\nEmail: ${responses.email}\n\nVerifique sua caixa de entrada e spam.`);
+            
+            // Opcional: redireciona para página de confirmação
+            // window.location.href = 'obrigado.html';
+        } else {
+            alert(`📧 Processando suas ideias grátis...\n\nEm breve você receberá no email:\n${responses.email}`);
+        }
         
     } catch (error) {
-        console.log('Backend offline durante envio gratuito');
+        alert(`📧 As ideias grátis serão enviadas para:\n\n${responses.email}\n\n(Erro de conexão com servidor)`);
     }
 }
 
@@ -786,31 +890,33 @@ window.closeModal = function() {
     document.getElementById('paymentModal').classList.remove('active');
 };
 window.processPayment = processPayment;
+window.sendFreeResults = sendFreeResults;
 
 // ===== INICIALIZAÇÃO =====
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializa quiz
     initQuiz();
     
-    // FAQ Accordion (se existir)
-    document.querySelectorAll('.faq-question').forEach(button => {
-        button.addEventListener('click', function() {
-            const item = this.parentElement;
-            item.classList.toggle('active');
-        });
-    });
+    // Recupera dados salvos se existirem
+    const savedResponses = localStorage.getItem('quizResponses');
+    const savedIdeas = localStorage.getItem('compatibleIdeas');
     
-    // Menu mobile (se existir)
-    document.getElementById('menuToggle')?.addEventListener('click', function() {
-        document.querySelector('.nav-menu')?.classList.toggle('active');
-    });
+    if (savedResponses) {
+        try {
+            responses = JSON.parse(savedResponses);
+        } catch (e) {
+            console.log("Erro ao recuperar respostas salvas");
+        }
+    }
     
-    // Fecha menu ao clicar em link (se existir)
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function() {
-            document.querySelector('.nav-menu')?.classList.remove('active');
-        });
-    });
+    if (savedIdeas) {
+        try {
+            compatibleIdeas = JSON.parse(savedIdeas);
+            totalIdeasCount = parseInt(localStorage.getItem('totalIdeasCount')) || compatibleIdeas.length;
+        } catch (e) {
+            console.log("Erro ao recuperar ideias salvas");
+        }
+    }
     
     console.log('Quiz inicializado com sucesso!');
 });
