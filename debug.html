@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Integração MP</title>
+</head>
+<body>
+    <h1>Debug - Renda Personalizada</h1>
+    
+    <div>
+        <h3>1. Backend URL:</h3>
+        <input type="text" id="backendUrl" style="width: 400px;" 
+               value="https://script.google.com/macros/s/SEU_ID/exec">
+        <button onclick="testBackend()">Testar Backend</button>
+        <pre id="backendResult"></pre>
+    </div>
+    
+    <div>
+        <h3>2. Testar Pagamento (Frontend):</h3>
+        <button onclick="simulatePayment()">Simular Pagamento</button>
+        <pre id="paymentResult"></pre>
+    </div>
+    
+    <script>
+        async function testBackend() {
+            const url = document.getElementById('backendUrl').value + '?action=testar_conexao';
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                document.getElementById('backendResult').innerHTML = 
+                    JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('backendResult').innerHTML = 
+                    'ERRO: ' + error.message;
+            }
+        }
+        
+        async function simulatePayment() {
+            const backendUrl = document.getElementById('backendUrl').value;
+            const paymentData = {
+                action: 'criar_pagamento',
+                produto: 'Renda Personalizada - Plano Básico',
+                valor: 14.90,
+                email: 'cliente@teste.com',
+                referencia: 'IR_' + Date.now()
+            };
+            
+            try {
+                const response = await fetch(backendUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(paymentData)
+                });
+                
+                const data = await response.json();
+                document.getElementById('paymentResult').innerHTML = 
+                    JSON.stringify(data, null, 2);
+                    
+                if (data.init_point) {
+                    window.open(data.init_point, '_blank');
+                }
+            } catch (error) {
+                document.getElementById('paymentResult').innerHTML = 
+                    'ERRO: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
