@@ -1,6 +1,6 @@
 // ===== CONFIGURAÇÃO =====
-const BACKEND_URL = 'https://script.google.com/macros/s/1ME4OqIWN8x53bdL1nhWk0LljZLP_A_eQOurE3LARs13kaDfR7UclsbQm/exec'; // ALTERE AQUI!
-const MERCADO_PAGO_PUBLIC_KEY = 'TEST-597f533c-659d-484f-9685-04fac2f2a939'; // ALTERE AQUI!
+const BACKEND_URL = 'https://script.google.com/macros/s/1ME4OqIWN8x53bdL1nhWk0LljZLP_A_eQOurE3LARs13kaDfR7UclsbQm/exec';
+const MERCADO_PAGO_PUBLIC_KEY = 'TEST-597f533c-659d-484f-9685-04fac2f2a939';
 
 // ===== BANCO DE IDEIAS COMPLETO (50+ IDEIAS) =====
 const IDEIAS_DATABASE = [
@@ -258,8 +258,7 @@ const IDEIAS_DATABASE = [
         renda_max: 1200,
         passos: `1. Analise 3-5 lojas locais\n2. Ofereça diagnóstico grátis\n3. Crie plano de conteúdo\n4. Pacote mensal de gestão`,
         links: "Instagram.com, LinkedIn.com"
-    },
-    // Adicione mais 35 ideias seguindo o mesmo padrão...
+    }
 ];
 
 // ===== VARIÁVEIS GLOBAIS =====
@@ -458,7 +457,7 @@ function showResults() {
     
     // Atualiza números na tela
     document.querySelectorAll('#totalIdeias, #totalIdeiasUpsell, #totalIdeiasFeature').forEach(el => {
-        el.textContent = totalIdeias;
+        if (el) el.textContent = totalIdeias;
     });
     
     // Exibe 3 ideias gratuitas
@@ -793,7 +792,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializa quiz
     initQuiz();
     
-    // FAQ Accordion
+    // FAQ Accordion (se existir)
     document.querySelectorAll('.faq-question').forEach(button => {
         button.addEventListener('click', function() {
             const item = this.parentElement;
@@ -801,40 +800,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Menu mobile
+    // Menu mobile (se existir)
     document.getElementById('menuToggle')?.addEventListener('click', function() {
-        document.querySelector('.nav-menu').classList.toggle('active');
+        document.querySelector('.nav-menu')?.classList.toggle('active');
     });
     
-    // Fecha menu ao clicar em link
+    // Fecha menu ao clicar em link (se existir)
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function() {
-            document.querySelector('.nav-menu').classList.remove('active');
+            document.querySelector('.nav-menu')?.classList.remove('active');
         });
     });
+    
+    console.log('Quiz inicializado com sucesso!');
 });
-
-// ===== FUNÇÃO PARA ADICIONAR MAIS IDEIAS (USE NO CONSOLE) =====
-function addMoreIdeas() {
-    // Cole mais ideias aqui seguindo o formato:
-    /*
-    IDEIAS_DATABASE.push({
-        id: 16,
-        titulo: "Título da Ideia",
-        descricao: "Descrição curta",
-        tempo_min: 1,
-        tempo_max: 4,
-        recursos: ["computador"],
-        habilidade: "organizado",
-        local: "Qualquer",
-        urgencia: "hoje",
-        investimento_min: 0,
-        investimento_max: 100,
-        renda_min: 300,
-        renda_max: 800,
-        passos: "Passo 1...\nPasso 2...\nPasso 3...",
-        links: "link1.com, link2.com"
-    });
-    */
-}
-
