@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeaRenda - Descubra Sua Próxima Fonte de Renda</title>
+    <meta name="description" content="Descubra ideias de renda personalizadas para seu perfil em 2 minutos. Comece a ganhar dinheiro hoje mesmo!">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    <span class="logo-icon">💡</span>
+                    <span class="logo-text">Idea<span class="logo-highlight">Renda</span></span>
+                </a>
+                
+                <div class="nav-menu">
+                    <a href="#como-funciona" class="nav-link">Como Funciona</a>
+                    <a href="#depoimentos" class="nav-link">Depoimentos</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                    <a href="quiz.html" class="nav-link nav-cta">
+                        <i class="fas fa-rocket"></i> Começar Agora
+                    </a>
+                </div>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-gradient">Pare de procurar</span><br>
+                        <span class="title-main">Receba ideias de renda feitas para <span class="text-highlight">você</span></span>
+                    </h1>
+                    
+                    <p class="hero-subtitle">
+                        Não existem fórmulas mágicas, mas existem caminhos certos. 
+                        Nosso algoritmo analisa seu perfil e sugere as melhores oportunidades 
+                        reais para você começar ainda esta semana.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">2.547+</div>
+                            <div class="stat-label">Pessoas já encontraram ideias</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">94%</div>
+                            <div class="stat-label">Taxa de satisfação</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">R$ 1.200+</div>
+                            <div class="stat-label">Renda extra média/mês</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-cta">
+                        <a href="quiz.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-bolt"></i> Descobrir Minhas Ideias (Grátis)
+                        </a>
+                        <div class="cta-note">
+                            <i class="fas fa-shield-alt"></i> Não pedimos cartão de crédito
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="result-preview">
+                        <div class="preview-header">
+                            <div class="preview-avatar">VO</div>
+                            <div class="preview-info">
+                                <div class="preview-name">Resultado Personalizado</div>
+                                <div class="preview-time">Gerado agora há pouco</div>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-content">
+                            <div class="result-badge">
+                                <span class="badge-icon">🎯</span>
+                                <span class="badge-text">Perfil: Organizador Prático</span>
+                            </div>
+                            
+                            <h4 class="preview-title">Suas 3 Melhores Opções:</h4>
+                            
+                            <div class="preview-idea">
+                                <div class="idea-icon">📊</div>
+                                <div class="idea-content">
+                                    <h5>Organizador de Planilhas</h5>
+                                    <p>R$ 400-800/mês • 2h/dia • Começar hoje</p>
+                                </div>
+                            </div>
+                            
+                            <div class="preview-idea">
+                                <div class="idea-icon">📦</div>
+                                <div class="idea-content">
+                                    <h5>Gestor de Vendas Online</h5>
+                                    <p>R$ 600-1.200/mês • 3h/dia • Semana que vem</p>
+                                </div>
+                            </div>
+                            
+                            <div class="preview-idea">
+                                <div class="idea-icon">🎨</div>
+                                <div class="idea-content">
+                                    <h5>Criador de Conteúdo Local</h5>
+                                    <p>R$ 300-600/mês • 1h/dia • Hoje mesmo</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-footer">
+                            <span class="preview-note">+7 outras ideias disponíveis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona -->
+    <section class="section section-dark" id="como-funciona">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Como funciona em 3 passos</h2>
+                <p class="section-subtitle">Simples, rápido e direto ao ponto</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📝</div>
+                    <h3 class="step-title">Responda o Quiz</h3>
+                    <p class="step-description">
+                        5 perguntas sobre seu tempo, habilidades e recursos.
+                        Leva menos de 2 minutos.
+                    </p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🤖</div>
+                    <h3 class="step-title">Receba Análise Personalizada</h3>
+                    <p class="step-description">
+                        Nosso algoritmo cruza suas respostas com 150+ ideias
+                        validadas de renda extra.
+                    </p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🚀</div>
+                    <h3 class="step-title">Escolha e Comece</h3>
+                    <p class="step-description">
+                        Receba ideias específicas com plano de ação passo a passo.
+                        Comece ainda hoje!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="section" id="depoimentos">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Quem já começou</h2>
+                <p class="section-subtitle">Histórias reais de pessoas reais</p>
+            </div>
+            
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">
+                            "Estava desempregado há 3 meses quando encontrei o IdeaRenda. 
+                            Em uma semana já estava ganhando R$ 50 por dia com serviços 
+                            simples na minha cidade."
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <div class="author-name">Marcos C.</div>
+                            <div class="author-role">Serviços Locais • São Paulo</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">
+                            "Como mãe em casa, tinha pouco tempo livre. As ideias 
+                            que recebi eram realistas e adaptadas à minha rotina. 
+                            Hoje complemento a renda da família sem sair de casa."
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AR</div>
+                        <div class="author-info">
+                            <div class="author-name">Ana R.</div>
+                            <div class="author-role">Trabalho Remoto • Curitiba</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">
+                            "O que mais gostei foi que não eram ideias genéricas. 
+                            Recebi opções que realmente faziam sentido para minhas 
+                            habilidades e equipamentos que já tinha."
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div class="author-info">
+                            <div class="author-name">Roberto S.</div>
+                            <div class="author-role">Freelancer Digital • Belo Horizonte</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section-dark" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <p class="section-subtitle">Tire suas dúvidas antes de começar</p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>É realmente gratuito?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! O quiz e as 3 primeiras ideias são 100% gratuitas. 
+                        A versão completa com todas as ideias e planos de ação 
+                        detalhados tem um custo único de R$ 14,90.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quanto tempo leva?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O quiz leva menos de 2 minutos. Imediatamente após 
+                        responder, você recebe suas primeiras ideias. A versão 
+                        completa é entregue instantaneamente após a confirmação 
+                        do pagamento.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Preciso de experiência ou equipamentos caros?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Não! Nosso algoritmo considera exatamente isso. Se você 
+                        tem pouco tempo, nenhuma experiência especial ou equipamentos 
+                        limitados, vamos sugerir ideias que funcionam dentro das suas 
+                        condições reais.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Há garantia?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! Oferecemos garantia de 7 dias. Se por qualquer motivo 
+                        você não gostar ou não encontrar ideias úteis, devolvemos 
+                        100% do seu dinheiro sem perguntas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">Pronto para descobrir suas melhores oportunidades?</h2>
+                <p class="cta-subtitle">
+                    Mais de 2.500 pessoas já encontraram caminhos reais para aumentar 
+                    sua renda. Chegou sua vez!
+                </p>
+                
+                <div class="cta-features">
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100% personalizado</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Sem fórmulas mágicas</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Comece hoje mesmo</span>
+                    </div>
+                </div>
+                
+                <a href="quiz.html" class="btn btn-primary btn-xl">
+                    <i class="fas fa-bolt"></i> Quero Minhas Ideias Personalizadas
+                </a>
+                
+                <div class="cta-security">
+                    <i class="fas fa-lock"></i>
+                    <span>Pagamento seguro • Garantia de 7 dias • Suporte humanizado</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">💡</span>
+                        <span class="logo-text">Idea<span class="logo-highlight">Renda</span></span>
+                    </a>
+                    <p class="footer-description">
+                        Conectando pessoas a oportunidades reais de renda desde 2023.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4 class="footer-title">Produto</h4>
+                        <a href="quiz.html" class="footer-link">Quiz Gratuito</a>
+                        <a href="#como-funciona" class="footer-link">Como Funciona</a>
+                        <a href="#depoimentos" class="footer-link">Depoimentos</a>
+                        <a href="#faq" class="footer-link">FAQ</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-title">Legal</h4>
+                        <a href="termos.html" class="footer-link">Termos de Uso</a>
+                        <a href="privacidade.html" class="footer-link">Privacidade</a>
+                        <a href="#" class="footer-link">Política de Reembolso</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-title">Contato</h4>
+                        <a href="mailto:suporte@idearenda.com" class="footer-link">suporte@idearenda.com</a>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2023 IdeaRenda. Todos os direitos reservados.</p>
+                <p class="disclaimer">Este site não faz promessas de enriquecimento rápido. Oferecemos ideias reais baseadas em seu perfil real.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
