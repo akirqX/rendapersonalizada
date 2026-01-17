@@ -3,67 +3,563 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descubra Suas Ideias de Renda</title>
+    <title>Quiz - Descubra Suas Ideias de Renda</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
+    <!-- Header Simples -->
+    <header class="quiz-header">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+            <div class="quiz-progress">
+                <div class="progress-text">
+                    <span id="currentStep">1</span> de <span id="totalSteps">7</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
         </div>
-        
-        <form id="quizForm">
-            <!-- Pergunta 1 -->
-            <div class="pergunta active" data-step="1">
-                <h3>1. Quanto tempo livre você tem por dia?</h3>
-                <div class="opcoes">
-                    <label class="opcao">
-                        <input type="radio" name="tempo" value="1" required>
-                        <span>1-2 horas</span>
+    </header>
+
+    <!-- Conteúdo do Quiz -->
+    <main class="quiz-container">
+        <div class="container">
+            <!-- Tela de Boas-vindas -->
+            <div class="quiz-step active" id="step0">
+                <div class="step-welcome">
+                    <div class="welcome-icon">🎯</div>
+                    <h1 class="welcome-title">Vamos encontrar suas melhores oportunidades</h1>
+                    <p class="welcome-subtitle">
+                        Responda 7 perguntas rápidas para receber ideias de renda 
+                        personalizadas para seu perfil específico.
+                    </p>
+                    
+                    <div class="welcome-features">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>100% personalizado</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Leva menos de 2 minutos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Resultados imediatos</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-lg" onclick="nextStep()">
+                        <i class="fas fa-play"></i> Começar Quiz
+                    </button>
+                    
+                    <div class="privacy-note">
+                        <i class="fas fa-lock"></i>
+                        <span>Suas respostas são anônimas e seguras</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pergunta 1: Tempo -->
+            <div class="quiz-step" id="step1">
+                <div class="step-header">
+                    <span class="step-badge">Pergunta 1 de 7</span>
+                    <h2 class="step-question">Quanto tempo livre você tem por dia para dedicar a uma renda extra?</h2>
+                    <p class="step-hint">Seja realista - pequenos espaços de tempo também funcionam!</p>
+                </div>
+                
+                <div class="options-grid">
+                    <label class="option-card" data-value="1">
+                        <div class="option-icon">⏰</div>
+                        <div class="option-content">
+                            <h3>1-2 horas</h3>
+                            <p>Intervalos curtos, antes/depois do trabalho</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
                     </label>
-                    <label class="opcao">
-                        <input type="radio" name="tempo" value="2">
-                        <span>3-4 horas</span>
+                    
+                    <label class="option-card" data-value="2">
+                        <div class="option-icon">📅</div>
+                        <div class="option-content">
+                            <h3>3-4 horas</h3>
+                            <p>Boa parte da tarde ou noite livre</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
                     </label>
-                    <label class="opcao">
-                        <input type="radio" name="tempo" value="3">
-                        <span>5+ horas</span>
+                    
+                    <label class="option-card" data-value="3">
+                        <div class="option-icon">🚀</div>
+                        <div class="option-content">
+                            <h3>5+ horas</h3>
+                            <p>Dias bastante flexíveis</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
                     </label>
-                    <label class="opcao">
-                        <input type="radio" name="tempo" value="0">
-                        <span>Apenas finais de semana</span>
+                    
+                    <label class="option-card" data-value="0">
+                        <div class="option-icon">📆</div>
+                        <div class="option-content">
+                            <h3>Apenas finais de semana</h3>
+                            <p>Sábado e domingo disponíveis</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
                     </label>
                 </div>
-                <button type="button" class="btn-proximo" onclick="avancarPergunta()">Próxima</button>
+                
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="nextBtn1" disabled>
+                        Próxima <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
-            
-            <!-- Pergunta 2 a 5 (similar) -->
-            <!-- Adicione mais perguntas aqui -->
-            
-            <!-- Email -->
-            <div class="pergunta" data-step="6">
-                <h3>Para enviar suas ideias personalizadas:</h3>
-                <input type="email" id="email" placeholder="seu@email.com" required>
-                <button type="submit" class="btn-enviar">Receber Minhas Ideias</button>
+
+            <!-- Pergunta 2: Recursos -->
+            <div class="quiz-step" id="step2">
+                <div class="step-header">
+                    <span class="step-badge">Pergunta 2 de 7</span>
+                    <h2 class="step-question">Quais destes recursos você tem disponível?</h2>
+                    <p class="step-hint">Selecione todos que se aplicam</p>
+                </div>
+                
+                <div class="options-grid">
+                    <label class="option-card option-multiple" data-value="computador">
+                        <div class="option-icon">💻</div>
+                        <div class="option-content">
+                            <h3>Computador + Internet</h3>
+                            <p>PC ou notebook com conexão estável</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-plus"></i></div>
+                    </label>
+                    
+                    <label class="option-card option-multiple" data-value="celular">
+                        <div class="option-icon">📱</div>
+                        <div class="option-content">
+                            <h3>Celular smartphone</h3>
+                            <p>Com acesso a aplicativos e internet</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-plus"></i></div>
+                    </label>
+                    
+                    <label class="option-card option-multiple" data-value="transporte">
+                        <div class="option-icon">🚗</div>
+                        <div class="option-content">
+                            <h3>Carro/Moto/Bicicleta</h3>
+                            <p>Para se locomover na cidade</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-plus"></i></div>
+                    </label>
+                    
+                    <label class="option-card option-multiple" data-value="espaco">
+                        <div class="option-icon">🏠</div>
+                        <div class="option-content">
+                            <h3>Espaço em casa</h3>
+                            <p>Quarto, sala ou garagem disponível</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-plus"></i></div>
+                    </label>
+                    
+                    <label class="option-card option-multiple" data-value="ferramentas">
+                        <div class="option-icon">🛠️</div>
+                        <div class="option-content">
+                            <h3>Ferramentas básicas</h3>
+                            <p>Martelo, chaves, material de escritório</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-plus"></i></div>
+                    </label>
+                    
+                    <label class="option-card option-multiple" data-value="nenhum">
+                        <div class="option-icon">🤷</div>
+                        <div class="option-content">
+                            <h3>Nenhum dos acima</h3>
+                            <p>Apenas disposição para trabalhar</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-plus"></i></div>
+                    </label>
+                </div>
+                
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="nextBtn2" disabled>
+                        Próxima <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
-        </form>
-        
-        <div id="resultado" class="hidden">
-            <h2>🎉 Encontramos suas melhores opções!</h2>
-            <div id="ideiasContainer"></div>
-            
-            <div id="upsell" class="upsell-box hidden">
-                <h3>🚀 Quer ver todas as <span id="totalIdeias">0</span> ideias compatíveis?</h3>
-                <p>Versão completa com plano de ação detalhado, templates prontos e suporte!</p>
-                <button id="btnComprar" class="btn-comprar">Quero a versão completa por R$ 14,90</button>
+
+            <!-- Pergunta 3: Habilidades -->
+            <div class="quiz-step" id="step3">
+                <div class="step-header">
+                    <span class="step-badge">Pergunta 3 de 7</span>
+                    <h2 class="step-question">Com quais destas atividades você se identifica mais?</h2>
+                    <p class="step-hint">Escolha a que melhor combina com você</p>
+                </div>
+                
+                <div class="options-grid">
+                    <label class="option-card" data-value="pessoas">
+                        <div class="option-icon">💬</div>
+                        <div class="option-content">
+                            <h3>Bom com pessoas</h3>
+                            <p>Vendas, atendimento, comunicação</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="organizado">
+                        <div class="option-icon">📊</div>
+                        <div class="option-content">
+                            <h3>Organizado e detalhista</h3>
+                            <p>Dados, planilhas, documentos, processos</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="criativo">
+                        <div class="option-icon">🎨</div>
+                        <div class="option-content">
+                            <h3>Criativo e artístico</h3>
+                            <p>Design, escrever, criar, inventar</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="pratico">
+                        <div class="option-icon">🔧</div>
+                        <div class="option-content">
+                            <h3>Prático e mão na massa</h3>
+                            <p>Consertos, montagem, reparos, construir</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="paciente">
+                        <div class="option-icon">👨‍🏫</div>
+                        <div class="option-content">
+                            <h3>Paciente e didático</h3>
+                            <p>Ensinar, cuidar, acompanhar, orientar</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                </div>
+                
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="nextBtn3" disabled>
+                        Próxima <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pergunta 4: Localização -->
+            <div class="quiz-step" id="step4">
+                <div class="step-header">
+                    <span class="step-badge">Pergunta 4 de 7</span>
+                    <h2 class="step-question">Onde você mora?</h2>
+                    <p class="step-hint">Isso ajuda a sugerir oportunidades locais</p>
+                </div>
+                
+                <div class="options-grid">
+                    <label class="option-card" data-value="capital">
+                        <div class="option-icon">🏙️</div>
+                        <div class="option-content">
+                            <h3>Capital/Grande cidade</h3>
+                            <p>São Paulo, Rio, Belo Horizonte, etc.</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="cidade-media">
+                        <div class="option-icon">🏘️</div>
+                        <div class="option-content">
+                            <h3>Cidade média</h3>
+                            <p>Até 500 mil habitantes</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="interior">
+                        <div class="option-icon">🌳</div>
+                        <div class="option-content">
+                            <h3>Interior/Cidade pequena</h3>
+                            <p>Até 100 mil habitantes</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="rural">
+                        <div class="option-icon">🚜</div>
+                        <div class="option-content">
+                            <h3>Zona rural</h3>
+                            <p>Sítio, fazenda, área agrícola</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                </div>
+                
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="nextBtn4" disabled>
+                        Próxima <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pergunta 5: Urgência -->
+            <div class="quiz-step" id="step5">
+                <div class="step-header">
+                    <span class="step-badge">Pergunta 5 de 7</span>
+                    <h2 class="step-question">Qual seu nível de urgência para começar a gerar renda?</h2>
+                    <p class="step-hint">Seja honesto - isso define o tipo de oportunidade</p>
+                </div>
+                
+                <div class="options-grid">
+                    <label class="option-card" data-value="hoje">
+                        <div class="option-icon">🔥</div>
+                        <div class="option-content">
+                            <h3>Máxima urgência</h3>
+                            <p>Preciso de dinheiro HOJE/AMANHÃ</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="semana">
+                        <div class="option-icon">⏱️</div>
+                        <div class="option-content">
+                            <h3>Urgência média</h3>
+                            <p>Posso esperar 1-2 semanas para começar</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="estavel">
+                        <div class="option-icon">📈</div>
+                        <div class="option-content">
+                            <h3>Busco renda estável</h3>
+                            <p>Posso investir tempo para algo duradouro</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                </div>
+                
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="nextBtn5" disabled>
+                        Próxima <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pergunta 6: Investimento -->
+            <div class="quiz-step" id="step6">
+                <div class="step-header">
+                    <span class="step-badge">Pergunta 6 de 7</span>
+                    <h2 class="step-question">Quanto você pode investir inicialmente?</h2>
+                    <p class="step-hint">Considerando materiais, inscrições, equipamentos básicos</p>
+                </div>
+                
+                <div class="options-grid">
+                    <label class="option-card" data-value="0">
+                        <div class="option-icon">💸</div>
+                        <div class="option-content">
+                            <h3>Até R$ 50</h3>
+                            <p>Quero começar com o mínimo possível</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="200">
+                        <div class="option-icon">💰</div>
+                        <div class="option-content">
+                            <h3>R$ 50 - 200</h3>
+                            <p>Posso investir um pouco para começar</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="500">
+                        <div class="option-icon">🏦</div>
+                        <div class="option-content">
+                            <h3>R$ 200 - 500</h3>
+                            <p>Tenho uma reserva para investir</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                    
+                    <label class="option-card" data-value="1000">
+                        <div class="option-icon">💎</div>
+                        <div class="option-content">
+                            <h3>Mais de R$ 500</h3>
+                            <p>Posso fazer um investimento inicial maior</p>
+                        </div>
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                    </label>
+                </div>
+                
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="nextBtn6" disabled>
+                        Próxima <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pergunta 7: Email -->
+            <div class="quiz-step" id="step7">
+                <div class="step-header">
+                    <span class="step-badge">Última etapa</span>
+                    <h2 class="step-question">Para onde enviar suas ideias personalizadas?</h2>
+                    <p class="step-hint">Não enviamos spam. Só conteúdo relevante!</p>
+                </div>
+                
+                <div class="email-step">
+                    <div class="email-preview">
+                        <div class="preview-email">
+                            <div class="email-subject">
+                                <strong>Assunto:</strong> 🎯 Suas 3 melhores ideias de renda
+                            </div>
+                            <div class="email-body">
+                                <p>Olá!<br>
+                                Baseado nas suas respostas, encontramos as melhores oportunidades para você começar ainda esta semana.</p>
+                                
+                                <div class="email-idea">
+                                    <strong>1. [IDEIA PERSONALIZADA]</strong><br>
+                                    R$ XXX-XXX/mês • Xh/dia • Começar hoje
+                                </div>
+                                
+                                <p>+ mais 2 ideias detalhadas e plano de ação!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="email-input">
+                        <label for="userEmail">Seu melhor email:</label>
+                        <div class="input-group">
+                            <input type="email" id="userEmail" placeholder="seu@email.com" required>
+                            <button class="btn btn-primary" onclick="submitQuiz()" id="submitBtn">
+                                <i class="fas fa-paper-plane"></i> Receber Minhas Ideias
+                            </button>
+                        </div>
+                        <div class="privacy-assurance">
+                            <i class="fas fa-lock"></i>
+                            <span>Seu email está seguro. Não compartilhamos seus dados.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resultados -->
+            <div class="quiz-step" id="resultsStep">
+                <div class="results-container">
+                    <div class="results-header">
+                        <div class="results-icon">🎉</div>
+                        <h2 class="results-title">Pronto! Analisamos seu perfil</h2>
+                        <p class="results-subtitle">
+                            Com base em suas respostas, encontramos 
+                            <span class="highlight" id="totalIdeias">12</span> 
+                            ideias compatíveis com você
+                        </p>
+                    </div>
+                    
+                    <div class="free-results">
+                        <h3>🎯 Suas 3 melhores opções (grátis):</h3>
+                        
+                        <div id="freeIdeasContainer">
+                            <!-- Ideias serão injetadas aqui via JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="upsell-section">
+                        <div class="upsell-card">
+                            <div class="upsell-badge">OFERTA ESPECIAL</div>
+                            <h3 class="upsell-title">Quer ver todas as <span id="totalIdeiasUpsell">12</span> ideias?</h3>
+                            
+                            <div class="upsell-features">
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Todas as <span id="totalIdeiasFeature">12</span> ideias compatíveis</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Planos de ação passo a passo para cada uma</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Templates prontos para começar hoje</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Lista de contatos e recursos necessários</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Acesso a comunidade exclusiva</span>
+                                </div>
+                            </div>
+                            
+                            <div class="pricing">
+                                <div class="old-price">De: R$ 47,00</div>
+                                <div class="new-price">Por apenas: <span class="price">R$ 14,90</span></div>
+                                <div class="price-note">Preço promocional por tempo limitado</div>
+                            </div>
+                            
+                            <button class="btn btn-primary btn-xl" id="buyButton">
+                                <i class="fas fa-bolt"></i> Quero Todas as Ideias - R$ 14,90
+                            </button>
+                            
+                            <div class="guarantee">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Garantia de 7 dias ou seu dinheiro de volta</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alternative-option">
+                        <p>Prefere apenas as 3 ideias gratuitas?</p>
+                        <a href="#" class="btn btn-secondary" id="skipUpsell">
+                            <i class="fas fa-envelope"></i> Enviar apenas as 3 ideias grátis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Pagamento -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Finalizar Compra</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="paymentContainer">
+                    <!-- Mercado Pago será injetado aqui -->
+                    <div class="loading-payment">
+                        <div class="spinner"></div>
+                        <p>Carregando checkout seguro...</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
-    <!-- Mercado Pago -->
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-    <script src="js/quiz.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/mercadopago.js"></script>
+
+    <script src="js/quiz-engine.js"></script>
+    <script src="js/payment-handler.js"></script>
 </body>
 </html>
