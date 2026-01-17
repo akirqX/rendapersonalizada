@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzkr62a2s4RjmEHGJx4y8m8m3X70C0Xq_8GKG5w3w_-2MzcvmCb53UpzFHNpHwozg0_zw/exec';
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzBB1IkxnBnWdO1eBL_BWSKQTJFftPb0DIT4j1C_wVOo8h-9kjx45ELToVMu1qkN0w_pw/exec';
 
 async function enviarParaBackend(action, data) {
     const response = await fetch(BACKEND_URL, {
