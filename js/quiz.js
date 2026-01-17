@@ -1,6 +1,6 @@
 // ===== CONFIGURAÇÃO =====
-const BACKEND_URL = 'https://script.google.com/macros/s/SEU_SCRIPT_ID/exec'; // ALTERE AQUI!
-const MERCADO_PAGO_PUBLIC_KEY = 'TEST-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'; // ALTERE AQUI!
+const BACKEND_URL = 'https://script.google.com/macros/s/1ME4OqIWN8x53bdL1nhWk0LljZLP_A_eQOurE3LARs13kaDfR7UclsbQm/exec'; // ALTERE AQUI!
+const MERCADO_PAGO_PUBLIC_KEY = 'TEST-597f533c-659d-484f-9685-04fac2f2a939'; // ALTERE AQUI!
 
 // ===== BANCO DE IDEIAS COMPLETO (50+ IDEIAS) =====
 const IDEIAS_DATABASE = [
@@ -837,3 +837,4 @@ function addMoreIdeas() {
     });
     */
 }
+
