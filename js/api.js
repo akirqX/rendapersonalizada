@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzkAgqdJYKcdi4ACu8Q3cxPSAsjbCXiX8AuRYoWBuFNxSi79WBto-RqQwe3sgnDYKQv7w/exec';
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbwTE2NrLvZS7GxajuYRr1UTPBO-LgiOPYekA6V7lInHgwA2gGqIBol3RCmVuWOzq4pIZw/exec';
 
 async function enviarParaBackend(action, data) {
     const response = await fetch(BACKEND_URL, {
@@ -23,7 +23,7 @@ async function enviarParaBackend(action, data) {
 function getBackendUrl() {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         // URL do Google Script (alterar após publicar)
-        return 'https://script.google.com/macros/s/SEU_SCRIPT_ID/exec';
+        return 'https://script.google.com/macros/s/AKfycbwTE2NrLvZS7GxajuYRr1UTPBO-LgiOPYekA6V7lInHgwA2gGqIBol3RCmVuWOzq4pIZw/exec';
     }
     return BACKEND_URL;
 }
