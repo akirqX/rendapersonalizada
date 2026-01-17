@@ -198,6 +198,67 @@
                 console.log('Conversão registrada: Compra confirmada');
             }, 1000);
         });
-    </script>
+    <!-- Adicione isso no final do sucesso.html, antes do </body> -->
+<script>
+// sucesso.html - Script para processar dados da compra
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Tenta pegar dados da URL (Mercado Pago retorna com parâmetros)
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentId = urlParams.get('payment_id') || 
+                      urlParams.get('collection_id') || 
+                      urlParams.get('preference_id');
+    
+    const status = urlParams.get('status') || 'approved';
+    const email = urlParams.get('email') || localStorage.getItem('userEmail');
+    
+    // 2. Atualiza a página com os dados
+    if (paymentId) {
+        document.getElementById('paymentId').textContent = paymentId;
+        document.getElementById('paymentStatus').textContent = status === 'approved' ? 'Aprovado' : 'Processando';
+    }
+    
+    if (email) {
+        document.getElementById('userEmail').textContent = email;
+        localStorage.setItem('userEmail', email);
+    }
+    
+    // 3. Mostra mensagem personalizada
+    const statusElement = document.getElementById('paymentStatus');
+    if (statusElement) {
+        if (status === 'approved') {
+            statusElement.innerHTML = '<span class="status-approved">✅ APROVADO</span>';
+            document.getElementById('successMessage').innerHTML = 
+                '<h2>🎉 Parabéns! Seu relatório está sendo enviado</h2>' +
+                '<p>Em instantes você receberá um email com todas as ideias personalizadas.</p>';
+        } else if (status === 'pending') {
+            statusElement.innerHTML = '<span class="status-pending">⏳ PENDENTE</span>';
+            document.getElementById('successMessage').innerHTML = 
+                '<h2>⏳ Pagamento em processamento</h2>' +
+                '<p>Assim que confirmarmos o pagamento, enviaremos seu relatório.</p>';
+        }
+    }
+    
+    // 4. Remove dados do localStorage (opcional)
+    setTimeout(() => {
+        localStorage.removeItem('quizResponses');
+        localStorage.removeItem('compatibleIdeas');
+    }, 5000);
+    
+    console.log('Compra processada:', { paymentId, status, email });
+});
+</script>
+
+<!-- Adicione também estes elementos no corpo da página sucesso.html -->
+<!-- Substitua o conteúdo da div .success-header por: -->
+<div class="success-header">
+    <div class="success-icon">🎉</div>
+    <h1 class="success-title" id="successMessage">Compra confirmada com sucesso!</h1>
+    <div class="payment-details">
+        <p><strong>ID da transação:</strong> <span id="paymentId">MP-${Date.now()}</span></p>
+        <p><strong>Status:</strong> <span id="paymentStatus">Processando...</span></p>
+        <p><strong>Email:</strong> <span id="userEmail">carregando...</span></p>
+    </div>
+</div>
 </body>
 </html>
