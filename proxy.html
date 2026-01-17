@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Proxy CORS</title>
+    <script>
+        // Função para receber mensagens do iframe pai
+        window.addEventListener('message', function(event) {
+            if (event.origin !== 'https://akirqx.github.io') return;
+            
+            const { action, data, id } = event.data;
+            
+            fetch('https://script.google.com/macros/s/AKfycbwTE2NrLvZS7GxajuYRr1UTPBO-LgiOPYekA6V7lInHgwA2gGqIBol3RCmVuWOzq4pIZw/exec', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action, ...data })
+            })
+            .then(response => response.json())
+            .then(result => {
+                window.parent.postMessage({
+                    type: 'response',
+                    id: id,
+                    result: result
+                }, 'https://akirqx.github.io');
+            })
+            .catch(error => {
+                window.parent.postMessage({
+                    type: 'error',
+                    id: id,
+                    error: error.message
+                }, 'https://akirqx.github.io');
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Esta página age como proxy CORS -->
+</body>
+</html>
