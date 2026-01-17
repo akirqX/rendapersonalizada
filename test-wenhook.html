@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste Webhook - Renda Personalizada</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .test { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #4361ee; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #3a56d4; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 3px; overflow: auto; }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Teste de Integração Mercado Pago</h1>
+    
+    <div class="test">
+        <h3>✅ 1. Testar Conexão com Backend</h3>
+        <p>URL: <code id="url">https://script.google.com/macros/s/AKfycbzkr62a2s4RjmEHGJx4y8m8m3X70C0Xq_8GKG5w3w_-2MzcvmCb53UpzFHNpHwozg0_zw/exec</code></p>
+        <button onclick="testarConexao()">Testar Conexão</button>
+        <div id="resultado1"></div>
+    </div>
+    
+    <div class="test">
+        <h3>🔄 2. Testar Webhook Manualmente</h3>
+        <p>Simula uma notificação do Mercado Pago</p>
+        <button onclick="simularWebhook()">Simular Webhook</button>
+        <div id="resultado2"></div>
+    </div>
+    
+    <div class="test">
+        <h3>💰 3. Testar Criação de Pagamento</h3>
+        <button onclick="testarPagamento()">Criar Pagamento de Teste (R$ 1,00)</button>
+        <div id="resultado3"></div>
+    </div>
+    
+    <div class="test">
+        <h3>📋 4. Verificar Logs do Script</h3>
+        <p>Acesse: <a href="https://script.google.com/home/projects/AKfycbzkr62a2s4RjmEHGJx4y8m8m3X70C0Xq_8GKG5w3w_-2MzcvmCb53UpzFHNpHwozg0_zw/executions" target="_blank">
+            👉 Ver Logs de Execução
+        </a></p>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzkr62a2s4RjmEHGJx4y8m8m3X70C0Xq_8GKG5w3w_-2MzcvmCb53UpzFHNpHwozg0_zw/exec';
+        
+        async function testarConexao() {
+            try {
+                const response = await fetch(`${BACKEND_URL}?action=testar_conexao`);
+                const data = await response.json();
+                document.getElementById('resultado1').innerHTML = 
+                    `<pre class="success">✅ Conexão OK\n${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('resultado1').innerHTML = 
+                    `<pre class="error">❌ Erro: ${error.message}</pre>`;
+            }
+        }
+        
+        async function simularWebhook() {
+            const webhookData = {
+                action: "webhook_mp",
+                type: "payment",
+                data: {
+                    id: "TEST_" + Date.now(),
+                    status: "approved",
+                    external_reference: "IR_" + Date.now(),
+                    transaction_amount: 14.90,
+                    payer: { email: "teste@exemplo.com" }
+                }
+            };
+            
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(webhookData)
+                });
+                
+                const data = await response.json();
+                document.getElementById('resultado2').innerHTML = 
+                    `<pre>📨 Webhook enviado:\n${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('resultado2').innerHTML = 
+                    `<pre class="error">❌ Erro: ${error.message}</pre>`;
+            }
+        }
+        
+        async function testarPagamento() {
+            const paymentData = {
+                action: 'registrar_pagamento',
+                email: 'teste@exemplo.com',
+                respostas: {
+                    tempo: 4,
+                    recursos: ['computador', 'celular'],
+                    habilidade: 'organizado',
+                    local: 'capital',
+                    urgencia: 'semana',
+                    investimento: 200
+                },
+                produto: 'Teste R$ 1,00',
+                valor: 1.00
+            };
+            
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(paymentData)
+                });
+                
+                const data = await response.json();
+                if (data.sucesso && data.payment_url) {
+                    document.getElementById('resultado3').innerHTML = 
+                        `<pre class="success">✅ Pagamento criado!\nID: ${data.preference_id}\nURL: ${data.payment_url}</pre>
+                         <p><a href="${data.payment_url}" target="_blank">👉 Clique para pagar R$ 1,00 (TESTE)</a></p>`;
+                } else {
+                    document.getElementById('resultado3').innerHTML = 
+                        `<pre class="error">❌ Erro: ${JSON.stringify(data, null, 2)}</pre>`;
+                }
+            } catch (error) {
+                document.getElementById('resultado3').innerHTML = 
+                    `<pre class="error">❌ Erro: ${error.message}</pre>`;
+            }
+        }
+    </script>
+</body>
+</html>
