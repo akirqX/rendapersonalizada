@@ -1,6 +1,6 @@
 // ===== CONFIGURAÇÃO =====
 // SUBSTITUA ESTA URL PELA URL DO SEU GOOGLE APPS SCRIPT PUBLICADO
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzBB1IkxnBnWdO1eBL_BWSKQTJFftPb0DIT4j1C_wVOo8h-9kjx45ELToVMu1qkN0w_pw/exec';
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzkAgqdJYKcdi4ACu8Q3cxPSAsjbCXiX8AuRYoWBuFNxSi79WBto-RqQwe3sgnDYKQv7w/exec';
 
 // ===== BANCO DE IDEIAS COMPLETO (15 IDEIAS) =====
 const IDEIAS_DATABASE = [
@@ -920,5 +920,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Quiz inicializado com sucesso!');
 });
+
 
 
